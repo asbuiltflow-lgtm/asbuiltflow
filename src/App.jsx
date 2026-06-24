@@ -296,6 +296,7 @@ function Header({ title, subtitle }) {
   return (
     <div className="header">
       <div>
+        <div className="prototype-badge">Prototype Preview</div>
         <span>Telecom Closeout Management</span>
         <h1>{title}</h1>
         <p>{subtitle}</p>

@@ -626,4 +626,43 @@ textarea {
   padding: 12px 18px;
   color: #cbd5e1;
   white-space: nowrap;
+}.prototype-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  background: rgba(37,99,235,.15);
+  border: 1px solid rgba(37,99,235,.4);
+  border-radius: 999px;
+  color: #60a5fa;
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.updates-pill {
+  background: #111827;
+  border: 1px solid #1e293b;
+  border-radius: 999px;
+  padding: 12px 18px;
+  color: #cbd5e1;
+  white-space: nowrap;
+}
+
+.demo-box {
+  margin-top: 40px;
+  padding: 16px;
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  background: #111827;
+}
+
+.demo-box span {
+  display: block;
+  color: #94a3b8;
+  margin-bottom: 8px;
+}
+
+.demo-box strong {
+  display: block;
 }
