@@ -94,7 +94,8 @@ export default function App() {
   return (
     <div className="app">
       <aside className="sidebar">
-        <div className="brand">AsBuiltFlow</div>
+       <div className="brand">ASBUILTFLOW</div>
+<span className="subbrand">Telecom Closeout Platform</span>
         <span className="subbrand">Telecom Review Platform</span>
 
         <button className={view === "dashboard" ? "nav active" : "nav"} onClick={() => setView("dashboard")}>Projects</button>
@@ -111,7 +112,7 @@ export default function App() {
       <main className="main">
         {view === "dashboard" && (
           <>
-            <Header title="Project Dashboard" subtitle="Track as-built reviews, contractor corrections, revisions, and closeout status." />
+            <Header title="Project Dashboard" subtitle="Manage contractor submissions, corrections, revisions, and final approval."/>
 
             <div className="toolbar">
               <input
@@ -119,14 +120,14 @@ export default function App() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <button className="primary">+ New Project</button>
+              <button className="primary">+ New Closeout</button>
             </div>
 
             <div className="stats">
-              <Stat label="Active Projects" value={stats.projects} />
-              <Stat label="Open Issues" value={stats.open} type="open" />
+              <Stat label="Active Closeouts" value={stats.projects} />
+              <Stat label="Open Corrections" value={stats.open} type="open" />
               <Stat label="Ready for Review" value={stats.review} type="review" />
-              <Stat label="Closed Issues" value={stats.closed} type="closed" />
+              <Stat label="Approved" value={stats.closed} type="closed" />
             </div>
 
             <section className="panel">
