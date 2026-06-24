@@ -92,17 +92,38 @@ export default function App() {
   }
 
   return (
-    <div className="app">
-      <aside className="sidebar">
-       <div className="brand">ASBUILTFLOW</div>
-<span className="subbrand">Telecom Closeout Platform</span>
-        <span className="subbrand">Telecom Review Platform</span>
+  <div className="app">
+    <aside className="sidebar">
+      <div className="brand">ASBUILTFLOW</div>
+      <span className="subbrand">Telecom Closeout Platform</span>
 
-        <button className={view === "dashboard" ? "nav active" : "nav"} onClick={() => setView("dashboard")}>Projects</button>
-        <button className={view === "issues" ? "nav active" : "nav"} onClick={() => setView("issues")}>All Issues</button>
-        <button className={view === "contractor" ? "nav active" : "nav"} onClick={() => setView("contractor")}>Contractor View</button>
-        <button className={view === "reports" ? "nav active" : "nav"} onClick={() => setView("reports")}>Reports</button>
+      <button
+        className={view === "dashboard" ? "nav active" : "nav"}
+        onClick={() => setView("dashboard")}
+      >
+        Projects
+      </button>
 
+      <button
+        className={view === "issues" ? "nav active" : "nav"}
+        onClick={() => setView("issues")}
+      >
+        All Issues
+      </button>
+
+      <button
+        className={view === "contractor" ? "nav active" : "nav"}
+        onClick={() => setView("contractor")}
+      >
+        Contractor View
+      </button>
+
+      <button
+        className={view === "reports" ? "nav active" : "nav"}
+        onClick={() => setView("reports")}
+      >
+        Reports
+      </button>
         <div className="demo-box">
           <span>Prototype Build</span>
           <strong>Feedback Requested</strong>
