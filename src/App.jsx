@@ -11,7 +11,7 @@ const initialProjects = [
     submitted: "June 23, 2026",
     due: "June 28, 2026",
     progress: 72,
-    risk: "Due Soon",
+    risk: "At Risk",
     issues: [
       { id: 23, title: "Missing conduit depth", sheet: "Sheet 12", status: "Open", due: "June 26", priority: "High" },
       { id: 24, title: "Incorrect handhole location", sheet: "Sheet 18", status: "Ready for Review", due: "June 27", priority: "Medium" },
@@ -43,7 +43,15 @@ export default function App() {
 
   const selectedProject = projects.find((p) => p.id === selectedProjectId);
   const selectedIssue = selectedProject?.issues.find((i) => i.id === selectedIssueId);
-  const allIssues = projects.flatMap((p) => p.issues.map((i) => ({ ...i, project: p.name, projectId: p.id, contractor: p.contractor })));
+
+  const allIssues = projects.flatMap((p) =>
+    p.issues.map((i) => ({
+      ...i,
+      project: p.name,
+      projectId: p.id,
+      contractor: p.contractor,
+    }))
+  );
 
   const stats = useMemo(() => ({
     projects: projects.length,
@@ -87,7 +95,7 @@ export default function App() {
     <div className="app">
       <aside className="sidebar">
         <div className="brand">AsBuiltFlow</div>
-        <span className="subbrand">OSP closeout workspace</span>
+        <span className="subbrand">Telecom Review Platform</span>
 
         <button className={view === "dashboard" ? "nav active" : "nav"} onClick={() => setView("dashboard")}>Projects</button>
         <button className={view === "issues" ? "nav active" : "nav"} onClick={() => setView("issues")}>All Issues</button>
@@ -95,8 +103,8 @@ export default function App() {
         <button className={view === "reports" ? "nav active" : "nav"} onClick={() => setView("reports")}>Reports</button>
 
         <div className="demo-box">
-          <span>Demo Mode</span>
-          <strong>No real customer data</strong>
+          <span>Prototype Build</span>
+          <strong>Feedback Requested</strong>
         </div>
       </aside>
 
@@ -106,7 +114,11 @@ export default function App() {
             <Header title="Project Dashboard" subtitle="Track as-built reviews, contractor corrections, revisions, and closeout status." />
 
             <div className="toolbar">
-              <input placeholder="Search projects or contractors..." value={search} onChange={(e) => setSearch(e.target.value)} />
+              <input
+                placeholder="Search projects or contractors..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
               <button className="primary">+ New Project</button>
             </div>
 
@@ -297,7 +309,11 @@ function Header({ title, subtitle }) {
     <div className="header">
       <div>
         <div className="prototype-badge">Prototype Preview</div>
-        <span>Telecom Closeout Management</span>
+
+        <span className="header-kicker">
+          Telecom Closeout Management
+        </span>
+
         <h1>{title}</h1>
         <p>{subtitle}</p>
       </div>

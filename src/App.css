@@ -666,3 +666,19 @@ textarea {
 .demo-box strong {
   display: block;
 }
+.header-kicker {
+  display: block;
+  color: #60a5fa;
+  font-size: 13px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.footer {
+  margin-top: 40px;
+  padding: 24px;
+  text-align: center;
+  color: #64748b;
+  border-top: 1px solid #1e293b;
+}
