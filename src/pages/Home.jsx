@@ -167,9 +167,11 @@ export default function Home() {
         </div>
 
         <div className="footerLinks">
-          <a href="/demo">Try Demo</a>
-          <a href={`mailto:${CONTACT_EMAIL}`}>Contact</a>
-        </div>
+  <a href="/demo">Try Demo</a>
+  <a href={`mailto:${CONTACT_EMAIL}`}>Contact</a>
+  <a href="/privacy">Privacy</a>
+  <a href="/terms">Terms</a>
+</div>
       </footer>
     </div>
   );

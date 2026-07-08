@@ -310,4 +310,29 @@ footer a {
   .navLinks {
     display: none;
   }
+}.legalPage {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 80px 24px;
+  color: #0f172a;
+}
+
+.legalPage h1 {
+  font-size: 48px;
+  letter-spacing: -0.05em;
+  margin-bottom: 12px;
+}
+
+.legalPage p {
+  color: #475569;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.legalPage a {
+  display: inline-block;
+  margin-top: 24px;
+  color: #2563eb;
+  font-weight: 900;
+  text-decoration: none;
 }
