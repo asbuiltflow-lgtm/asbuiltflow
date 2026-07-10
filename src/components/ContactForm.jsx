@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const FORM_ENDPOINT = "https://formspree.io/f/xgojgpjn";
 
@@ -13,12 +13,19 @@ export default function ContactForm({
 
   const isDemoRequest = formType === "demo";
 
+  const handleClose = useCallback(() => {
+    setStatus("idle");
+    setErrorMessage("");
+    setSubmittedName("");
+    onClose();
+  }, [onClose]);
+
   useEffect(() => {
     if (!isOpen) return undefined;
 
     function handleEscape(event) {
       if (event.key === "Escape") {
-        onClose();
+        handleClose();
       }
     }
 
@@ -29,21 +36,13 @@ export default function ContactForm({
       document.removeEventListener("keydown", handleEscape);
       document.body.style.overflow = "";
     };
-  }, [isOpen, onClose]);
-
-  useEffect(() => {
-    if (isOpen) {
-      setStatus("idle");
-      setErrorMessage("");
-      setSubmittedName("");
-    }
-  }, [isOpen, formType]);
+  }, [isOpen, handleClose]);
 
   if (!isOpen) return null;
 
   function handleBackdropClick(event) {
     if (event.target === event.currentTarget && status !== "submitting") {
-      onClose();
+      handleClose();
     }
   }
 
@@ -111,7 +110,7 @@ export default function ContactForm({
         <button
           type="button"
           className="contactModalClose"
-          onClick={onClose}
+          onClick={handleClose}
           aria-label="Close form"
           disabled={status === "submitting"}
         >
@@ -138,7 +137,7 @@ export default function ContactForm({
             <button
               type="button"
               className="contactPrimaryButton"
-              onClick={onClose}
+              onClick={handleClose}
             >
               Return to website
             </button>
