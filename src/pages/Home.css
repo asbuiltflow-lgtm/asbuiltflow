@@ -2,27 +2,39 @@
   min-height: 100vh;
   background: #ffffff;
   color: #111827;
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
 }
 
+/* =========================
+   NAVIGATION
+   ========================= */
+
 .navBar {
-  height: 76px;
-  padding: 0 7%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 76px;
+  padding: 0 7%;
   border-bottom: 1px solid #e5e7eb;
-  background: #ffffff;
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
 }
 
 .logo {
+  color: #0f172a;
   font-size: 24px;
   font-weight: 800;
   letter-spacing: -0.04em;
-  color: #0f172a;
+  text-decoration: none;
 }
 
 .navLinks {
@@ -33,51 +45,78 @@
 
 .navLinks a {
   color: #475569;
-  text-decoration: none;
-  font-weight: 600;
   font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.navLinks a:hover {
+  color: #2563eb;
 }
 
 .navButton {
-  background: #0f172a;
-  color: white !important;
   padding: 11px 18px;
   border-radius: 999px;
+  background: #0f172a;
+  color: #ffffff !important;
 }
 
+.contactNavButton {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #475569;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.contactNavButton:hover {
+  color: #2563eb;
+}
+
+/* =========================
+   HERO
+   ========================= */
+
 .hero {
-  padding: 90px 7%;
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   gap: 60px;
   align-items: center;
+  padding: 90px 7%;
   background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
 }
 
 .eyebrow,
 .sectionLabel {
   display: inline-block;
+  margin-bottom: 16px;
   color: #2563eb;
   font-size: 13px;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-bottom: 16px;
 }
 
 .hero h1 {
+  margin: 0 0 24px;
+  color: #020617;
   font-size: clamp(44px, 6vw, 76px);
   line-height: 0.96;
   letter-spacing: -0.07em;
-  margin: 0 0 24px;
-  color: #020617;
 }
 
 .hero p {
+  max-width: 680px;
+  color: #475569;
   font-size: 20px;
   line-height: 1.7;
-  color: #475569;
-  max-width: 680px;
+}
+
+.audience {
+  font-weight: 600;
 }
 
 .heroButtons {
@@ -86,34 +125,66 @@
   margin-top: 32px;
 }
 
+.heroButtons.center {
+  justify-content: center;
+}
+
 .primaryBtn,
 .secondaryBtn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-height: 50px;
   padding: 15px 22px;
   border-radius: 12px;
+  font: inherit;
   font-weight: 800;
   text-decoration: none;
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+button.primaryBtn,
+button.secondaryBtn {
+  border: 0;
 }
 
 .primaryBtn {
   background: #2563eb;
-  color: white;
+  color: #ffffff;
   box-shadow: 0 14px 30px rgba(37, 99, 235, 0.22);
 }
 
-.secondaryBtn {
-  background: white;
-  color: #0f172a;
-  border: 1px solid #cbd5e1;
+.primaryBtn:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
 }
 
+.secondaryBtn {
+  border: 1px solid #cbd5e1 !important;
+  background: #ffffff;
+  color: #0f172a;
+}
+
+.secondaryBtn:hover {
+  border-color: #94a3b8 !important;
+  background: #f8fafc;
+  transform: translateY(-1px);
+}
+
+/* =========================
+   HERO DASHBOARD CARD
+   ========================= */
+
 .heroCard {
-  background: white;
+  padding: 28px;
   border: 1px solid #e2e8f0;
   border-radius: 28px;
-  padding: 28px;
+  background: #ffffff;
   box-shadow: 0 30px 80px rgba(15, 23, 42, 0.12);
 }
 
@@ -131,16 +202,16 @@
 }
 
 .metricGrid div {
-  background: #f8fafc;
+  padding: 18px;
   border: 1px solid #e2e8f0;
   border-radius: 18px;
-  padding: 18px;
+  background: #f8fafc;
 }
 
 .metricGrid strong {
   display: block;
-  font-size: 32px;
   color: #0f172a;
+  font-size: 32px;
 }
 
 .metricGrid span {
@@ -155,12 +226,17 @@
 .miniList p {
   display: flex;
   justify-content: space-between;
+  gap: 14px;
   margin: 10px 0;
   padding: 14px;
   border-radius: 14px;
   background: #f8fafc;
   color: #334155;
 }
+
+/* =========================
+   SHARED SECTIONS
+   ========================= */
 
 .problem,
 .workflow,
@@ -182,59 +258,73 @@
 .problem h2,
 .workflow h2,
 .features h2,
-.founding h2 {
-  font-size: 42px;
-  letter-spacing: -0.05em;
+.founding h2,
+.demoSection h2,
+.contactSection h2 {
   margin: 0 0 18px;
   color: #020617;
+  font-size: 42px;
+  letter-spacing: -0.05em;
 }
 
 .problem p,
 .founding p {
-  font-size: 18px;
-  color: #64748b;
   max-width: 760px;
+  color: #64748b;
+  font-size: 18px;
   line-height: 1.7;
 }
 
+/* =========================
+   PROBLEM
+   ========================= */
+
 .problemGrid,
 .featureGrid {
-  margin-top: 34px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 18px;
+  margin-top: 34px;
 }
 
 .problemGrid div,
 .featureCard {
-  background: white;
+  padding: 24px;
   border: 1px solid #e2e8f0;
   border-radius: 20px;
-  padding: 24px;
+  background: #ffffff;
   box-shadow: 0 12px 30px rgba(15, 23, 42, 0.04);
 }
 
 .problemGrid div {
-  font-weight: 800;
   color: #0f172a;
+  font-weight: 800;
 }
 
+/* =========================
+   WORKFLOW
+   ========================= */
+
 .workflowSteps {
-  margin-top: 36px;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 12px;
+  margin-top: 36px;
 }
 
 .workflowSteps div {
-  background: white;
-  border: 1px solid #dbeafe;
-  color: #1e3a8a;
-  border-radius: 16px;
   padding: 20px 14px;
+  border: 1px solid #dbeafe;
+  border-radius: 16px;
+  background: #ffffff;
+  color: #1e3a8a;
   font-weight: 800;
   text-align: center;
 }
+
+/* =========================
+   FEATURES
+   ========================= */
 
 .featureGrid {
   grid-template-columns: repeat(3, 1fr);
@@ -252,6 +342,36 @@
   line-height: 1.6;
 }
 
+/* =========================
+   DEMO SECTION
+   ========================= */
+
+.demoSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 76px 7%;
+  background: #0f172a;
+  color: #ffffff;
+}
+
+.demoSection h2 {
+  color: #ffffff;
+}
+
+.demoSection p {
+  max-width: 720px;
+  margin: 0;
+  color: #cbd5e1;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+/* =========================
+   FOUNDING CUSTOMER SECTION
+   ========================= */
+
 .founding {
   display: grid;
   grid-template-columns: 1fr 0.8fr;
@@ -260,28 +380,50 @@
 }
 
 .foundingBox {
-  background: white;
+  padding: 34px;
   border: 1px solid #e2e8f0;
   border-radius: 26px;
-  padding: 34px;
+  background: #ffffff;
   box-shadow: 0 24px 70px rgba(15, 23, 42, 0.08);
 }
 
 .foundingBox ul {
+  margin-bottom: 28px;
   padding-left: 20px;
   color: #475569;
   line-height: 2;
-  margin-bottom: 28px;
 }
 
+/* =========================
+   CONTACT SECTION
+   ========================= */
+
+.contactSection {
+  padding: 86px 7%;
+  background: #ffffff;
+  text-align: center;
+}
+
+.contactSection > p {
+  max-width: 680px;
+  margin: 0 auto;
+  color: #64748b;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+/* =========================
+   FOOTER
+   ========================= */
+
 footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 34px 7%;
   border-top: 1px solid #e5e7eb;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  background: #ffffff;
   color: #64748b;
-  background: white;
 }
 
 footer strong {
@@ -289,11 +431,299 @@ footer strong {
   font-size: 20px;
 }
 
+footer p {
+  margin: 6px 0 0;
+}
+
 footer a {
   color: #2563eb;
   font-weight: 800;
   text-decoration: none;
 }
+
+.footerLinks {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.footerContactButton {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #2563eb;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.footerContactButton:hover,
+.footerLinks a:hover {
+  color: #1d4ed8;
+}
+
+/* =========================
+   LEGAL PAGES
+   ========================= */
+
+.legalPage {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 80px 24px;
+  color: #0f172a;
+}
+
+.legalPage h1 {
+  margin-bottom: 12px;
+  font-size: 48px;
+  letter-spacing: -0.05em;
+}
+
+.legalPage p {
+  color: #475569;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.legalPage a {
+  display: inline-block;
+  margin-top: 24px;
+  color: #2563eb;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+/* =========================================================
+   CONTACT AND DEMO FORM MODAL
+   ========================================================= */
+
+.contactModalBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  overflow-y: auto;
+  background: rgba(15, 23, 42, 0.66);
+  backdrop-filter: blur(7px);
+}
+
+.contactModal {
+  position: relative;
+  width: min(780px, 100%);
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  border: 1px solid #dbe3ef;
+  border-radius: 24px;
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 30px 90px rgba(15, 23, 42, 0.28);
+}
+
+.contactModalClose {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 5;
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid #dbe3ef;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #0f172a;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.contactModalClose:hover {
+  background: #f1f5f9;
+}
+
+.contactModalClose:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
+.contactFormHeader {
+  padding: 44px 48px 30px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.contactEyebrow {
+  margin: 0 0 10px;
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.contactFormHeader h2,
+.contactSuccess h2 {
+  margin: 0 0 14px;
+  color: #020617;
+  font-size: clamp(30px, 5vw, 44px);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.contactFormHeader p,
+.contactSuccess p {
+  margin: 0;
+  color: #475569;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.contactForm {
+  padding: 32px 48px 44px;
+}
+
+.contactFormGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.contactField {
+  display: grid;
+  gap: 8px;
+}
+
+.contactFieldFull {
+  grid-column: 1 / -1;
+}
+
+.contactField > span {
+  color: #1e293b;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.contactField input,
+.contactField select,
+.contactField textarea {
+  width: 100%;
+  margin: 0;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #0f172a;
+  font: inherit;
+  outline: none;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.contactField input,
+.contactField select {
+  min-height: 50px;
+  padding: 0 14px;
+}
+
+.contactField textarea {
+  min-height: 112px;
+  padding: 14px;
+  resize: vertical;
+}
+
+.contactField input::placeholder,
+.contactField textarea::placeholder {
+  color: #94a3b8;
+}
+
+.contactField input:focus,
+.contactField select:focus,
+.contactField textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.contactError {
+  margin-top: 20px;
+  padding: 14px 16px;
+  border: 1px solid #fecaca;
+  border-radius: 12px;
+  background: #fef2f2;
+  color: #991b1b;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.contactFormFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 26px;
+  padding-top: 24px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.contactFormFooter p {
+  max-width: 470px;
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.contactPrimaryButton {
+  flex-shrink: 0;
+  min-height: 50px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 12px;
+  background: #2563eb;
+  color: #ffffff;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.22);
+}
+
+.contactPrimaryButton:hover {
+  background: #1d4ed8;
+}
+
+.contactPrimaryButton:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.contactSuccess {
+  padding: 76px 48px 58px;
+  text-align: center;
+}
+
+.contactSuccessIcon {
+  display: grid;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 22px;
+  place-items: center;
+  border-radius: 50%;
+  background: #dcfce7;
+  color: #15803d;
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.contactSuccess .contactPrimaryButton {
+  margin-top: 28px;
+}
+
+/* =========================
+   TABLET
+   ========================= */
 
 @media (max-width: 900px) {
   .hero,
@@ -310,29 +740,105 @@ footer a {
   .navLinks {
     display: none;
   }
-}.legalPage {
-  max-width: 820px;
-  margin: 0 auto;
-  padding: 80px 24px;
-  color: #0f172a;
+
+  .demoSection {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .footerLinks {
+    flex-wrap: wrap;
+  }
 }
 
-.legalPage h1 {
-  font-size: 48px;
-  letter-spacing: -0.05em;
-  margin-bottom: 12px;
-}
+/* =========================
+   MOBILE
+   ========================= */
 
-.legalPage p {
-  color: #475569;
-  font-size: 18px;
-  line-height: 1.7;
-}
+@media (max-width: 700px) {
+  .hero {
+    gap: 40px;
+    padding-top: 64px;
+  }
 
-.legalPage a {
-  display: inline-block;
-  margin-top: 24px;
-  color: #2563eb;
-  font-weight: 900;
-  text-decoration: none;
+  .hero h1 {
+    font-size: 48px;
+  }
+
+  .hero p {
+    font-size: 18px;
+  }
+
+  .heroButtons {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .heroButtons .primaryBtn,
+  .heroButtons .secondaryBtn {
+    width: 100%;
+  }
+
+  .metricGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .problem h2,
+  .workflow h2,
+  .features h2,
+  .founding h2,
+  .demoSection h2,
+  .contactSection h2 {
+    font-size: 34px;
+  }
+
+  .contactModalBackdrop {
+    align-items: start;
+    padding: 12px;
+  }
+
+  .contactModal {
+    max-height: none;
+    margin: 12px 0;
+    border-radius: 20px;
+  }
+
+  .contactFormHeader {
+    padding: 36px 22px 24px;
+  }
+
+  .contactForm {
+    padding: 24px 22px 30px;
+  }
+
+  .contactFormGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .contactFieldFull {
+    grid-column: auto;
+  }
+
+  .contactFormFooter {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .contactPrimaryButton {
+    width: 100%;
+  }
+
+  .contactSuccess {
+    padding: 68px 22px 46px;
+  }
+
+  .footerLinks {
+    gap: 16px;
+  }
 }
