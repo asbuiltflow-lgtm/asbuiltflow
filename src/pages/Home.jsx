@@ -39,7 +39,7 @@ export default function Home() {
           </button>
 
           <a className="navButton" href="/app">
-            Launch Interactive Workspace
+            Launch Workspace
           </a>
         </div>
       </nav>
@@ -73,7 +73,7 @@ export default function Home() {
             </button>
 
             <a className="secondaryBtn" href="/app">
-              Launch Interactive Workspace
+              Explore Interactive Workspace
             </a>
           </div>
         </div>
@@ -211,7 +211,7 @@ export default function Home() {
         </div>
 
         <a className="primaryBtn" href="/app">
-          Launch Interactive Demo
+          Launch Interactive Workspace
         </a>
       </section>
 
@@ -282,7 +282,7 @@ export default function Home() {
         </div>
 
         <div className="footerLinks">
-          <a href="/app">Launch Interactive Workspace</a>
+          <a href="/app">Launch Workspace</a>
 
           <button
             type="button"
