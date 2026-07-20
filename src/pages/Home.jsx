@@ -38,9 +38,8 @@ export default function Home() {
             Contact
           </button>
 
-          <a className="navButton" href="/app">
-            Launch Workspace
-          </a>
+          <a className="navSignIn" href="/app">Sign In</a>
+          <a className="navButton" href="/demo">Explore Demo</a>
         </div>
       </nav>
 
@@ -72,9 +71,8 @@ export default function Home() {
               Schedule a Demo
             </button>
 
-            <a className="secondaryBtn" href="/app">
-              Explore Interactive Workspace
-            </a>
+            <a className="secondaryBtn" href="/demo">Explore Interactive Demo</a>
+            <a className="workspaceLink" href="/app">Sign In to Workspace</a>
           </div>
         </div>
 
@@ -210,8 +208,8 @@ export default function Home() {
           </p>
         </div>
 
-        <a className="primaryBtn" href="/app">
-          Launch Interactive Workspace
+        <a className="primaryBtn" href="/demo">
+          Launch Interactive Demo
         </a>
       </section>
 
@@ -282,7 +280,8 @@ export default function Home() {
         </div>
 
         <div className="footerLinks">
-          <a href="/app">Launch Workspace</a>
+          <a href="/demo">Explore Demo</a>
+          <a href="/app">Sign In</a>
 
           <button
             type="button"

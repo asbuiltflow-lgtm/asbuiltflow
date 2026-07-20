@@ -15,8 +15,8 @@ const ROLE_NAV={
 const NAV_LABEL={dashboard:"Dashboard",projects:"Projects",issues:"Issues",files:"Files & Photos",reports:"Reports",team:"Team",audit:"Activity"};
 const NAV_ICON={dashboard:"▦",projects:"▤",issues:"!",files:"▱",reports:"↗",team:"◎",audit:"≡"};
 
-export default function MvpApp(){
-  const [app,setApp]=useState(loadState); const [page,setPage]=useState("dashboard");
+export default function MvpApp({ authUser = null, onAuthSignOut = null }){
+  const [app,setApp]=useState(()=>{const initial=loadState();if(authUser){initial.currentUser={...authUser,role:authUser.role||"Admin",company:authUser.company||initial.organization.name}}return initial}); const [page,setPage]=useState("dashboard");
   const [selectedProjectId,setSelectedProjectId]=useState(null); const [selectedIssueId,setSelectedIssueId]=useState(null);
   const [search,setSearch]=useState(""); const [statusFilter,setStatusFilter]=useState("All");
   const [toast,setToast]=useState(""); const [modal,setModal]=useState(null); const [notificationOpen,setNotificationOpen]=useState(false);
@@ -32,7 +32,7 @@ export default function MvpApp(){
   function addActivity(p,text){p.activity.unshift({id:uid("a"),text,createdAt:new Date().toISOString()})}
   function notify(title,text){update(n=>n.notifications.unshift({id:uid("n"),title,text,read:false,createdAt:new Date().toISOString()}))}
   function login(id){const found=app.users.find(u=>u.id===id);setApp(p=>({...p,currentUser:found}));setToast(`Signed in as ${found.name}`)}
-  function logout(){setApp(p=>({...p,currentUser:null}));setPage("dashboard");setSelectedProjectId(null);setSidebarOpen(false)}
+  function logout(){if(onAuthSignOut){onAuthSignOut();return}setApp(p=>({...p,currentUser:null}));setPage("dashboard");setSelectedProjectId(null);setSidebarOpen(false)}
   function openProject(id){setSelectedProjectId(id);setSelectedIssueId(null);setPage("project");setSidebarOpen(false)}
   function openIssue(pid,iid){setSelectedProjectId(pid);setSelectedIssueId(iid);setPage("issue");setSidebarOpen(false)}
   function changeProjectStatus(id,status){update(n=>{const p=n.projects.find(x=>x.id===id);p.status=status;p.progress=status==="Approved"?100:status==="Closed"?100:Math.max(p.progress,workflowPercent(status));p.updatedAt=new Date().toISOString();addActivity(p,`${user.name} changed project status to ${status}`)});notify("Project status updated",`${selectedProject?.name||"Project"} is now ${status}.`);setToast(`Project moved to ${status}`)}

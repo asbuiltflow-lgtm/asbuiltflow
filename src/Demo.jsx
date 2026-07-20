@@ -1,434 +1,49 @@
-import { useMemo, useState } from "react";
-import "./App.css";
+import { useMemo, useState } from 'react';
+import './app/RealWorkspace.css';
 
-const initialProjects = [
-  {
-    id: 1,
-    name: "Bedford Fiber Expansion",
-    contractor: "ABC Construction",
-    coordinator: "Morgan",
-    inspector: "Gage",
-    status: "Inspector Review",
-    version: "Rev 3",
-    submitted: "June 23, 2026",
-    due: "June 28, 2026",
-    progress: 72,
-    issues: [
-      {
-        id: 23,
-        title: "Missing conduit depth",
-        sheet: "Sheet 12",
-        status: "Open",
-        priority: "High",
-        assignedTo: "Contractor",
-        comments: [
-          { author: "Inspector", text: "Missing conduit depth near HH-14. Please update before approval." },
-          { author: "ABC Construction", text: "Received. We will update this on the next revision." },
-        ],
-      },
-      {
-        id: 24,
-        title: "Incorrect handhole location",
-        sheet: "Sheet 18",
-        status: "Ready for Review",
-        priority: "Medium",
-        assignedTo: "Inspector",
-        comments: [
-          { author: "Inspector", text: "HH location appears shifted from field placement." },
-        ],
-      },
-    ],
-    revisions: ["Rev 1 Submitted", "Rev 2 Needs Rework", "Rev 3 In Review"],
-  },
-  {
-    id: 2,
-    name: "Bloomington FTTH Build",
-    contractor: "XYZ Telecom",
-    coordinator: "Morgan",
-    inspector: "Gage",
-    status: "Coordinator Review",
-    version: "Rev 1",
-    submitted: "June 21, 2026",
-    due: "June 30, 2026",
-    progress: 38,
-    issues: [
-      {
-        id: 31,
-        title: "Missing stationing",
-        sheet: "Sheet 7",
-        status: "Open",
-        priority: "Low",
-        assignedTo: "Contractor",
-        comments: [{ author: "Coordinator", text: "Stationing missing on Sheet 7." }],
-      },
-    ],
-    revisions: ["Rev 1 Submitted"],
-  },
+const projectsSeed=[
+ {id:'p1',project_number:'BF-2026-014',name:'Bedford Fiber Expansion',contractor:'ABC Construction',status:'inspector_review',progress:72,due:'Jul 28, 2026',inspector:'Gage Burke',issues:[{id:'i1',n:23,title:'Missing conduit depth',sheet:'Sheet 12',priority:'high',status:'open',description:'Conduit depth is missing near HH-14.'},{id:'i2',n:24,title:'Incorrect handhole location',sheet:'Sheet 18',priority:'medium',status:'ready_for_review',description:'Handhole location does not match field placement.'}]},
+ {id:'p2',project_number:'BT-2026-031',name:'Bloomington FTTH Build',contractor:'XYZ Telecom',status:'coordinator_review',progress:38,due:'Aug 2, 2026',inspector:'Unassigned',issues:[{id:'i3',n:31,title:'Missing stationing',sheet:'Sheet 7',priority:'low',status:'open',description:'Stationing is missing from the redline.'}]},
+ {id:'p3',project_number:'MC-2026-008',name:'Monroe County Backbone',contractor:'Hoosier Utility Services',status:'approved',progress:100,due:'Jul 19, 2026',inspector:'Gage Burke',issues:[]},
 ];
+const labels={inspector_review:'Inspector Review',coordinator_review:'Coordinator Review',approved:'Approved',open:'Open',ready_for_review:'Ready for Review'};
+const navItems=[['dashboard','▦','Dashboard'],['projects','▤','Projects'],['issues','!','Issues'],['files','▱','Files & Photos'],['reports','↗','Reports'],['activity','≡','Activity']];
+const Panel=({title,children})=><section className="rwPanel"><header><h2>{title}</h2></header>{children}</section>;
+const Header=({eyebrow,title,text,action})=><div className="rwPageHeader"><div><span>{eyebrow}</span><h1>{title}</h1><p>{text}</p></div>{action}</div>;
 
-export default function Demo() {
-  const [projects, setProjects] = useState(initialProjects);
-  const [view, setView] = useState("dashboard");
-  const [role, setRole] = useState("Inspector");
-  const [selectedProjectId, setSelectedProjectId] = useState(1);
-  const [selectedIssueId, setSelectedIssueId] = useState(23);
-  const [notice, setNotice] = useState("Welcome to the AsBuiltFlow interactive demo.");
-
-  const selectedProject = projects.find((p) => p.id === selectedProjectId);
-  const selectedIssue = selectedProject?.issues.find((i) => i.id === selectedIssueId);
-
-  const allIssues = projects.flatMap((p) =>
-    p.issues.map((i) => ({
-      ...i,
-      project: p.name,
-      projectId: p.id,
-      contractor: p.contractor,
-    }))
-  );
-
-  const stats = useMemo(() => ({
-    active: projects.length,
-    open: allIssues.filter((i) => i.status !== "Closed").length,
-    review: projects.filter((p) => p.status.includes("Review")).length,
-    approved: allIssues.filter((i) => i.status === "Closed").length,
-  }), [projects, allIssues]);
-
-  function openProject(id) {
-    setSelectedProjectId(id);
-    setView("project");
-    setNotice("Project opened.");
-  }
-
-  function openIssue(projectId, issueId) {
-    setSelectedProjectId(projectId);
-    setSelectedIssueId(issueId);
-    setView("issue");
-    setNotice("Issue details opened.");
-  }
-
-  function updateProjectStatus(status) {
-    setProjects((prev) =>
-      prev.map((p) => p.id === selectedProjectId ? { ...p, status } : p)
-    );
-    setNotice(`Project marked as ${status}.`);
-  }
-
-  function updateIssueStatus(status) {
-    setProjects((prev) =>
-      prev.map((p) =>
-        p.id === selectedProjectId
-          ? {
-              ...p,
-              issues: p.issues.map((i) =>
-                i.id === selectedIssueId ? { ...i, status } : i
-              ),
-            }
-          : p
-      )
-    );
-    setNotice(`Issue marked as ${status}.`);
-  }
-
-  function uploadRevision() {
-    setProjects((prev) =>
-      prev.map((p) =>
-        p.id === selectedProjectId
-          ? {
-              ...p,
-              version: `Rev ${p.revisions.length + 1}`,
-              status: "Revision Submitted",
-              revisions: [...p.revisions, `Rev ${p.revisions.length + 1} Submitted`],
-              progress: Math.min(100, p.progress + 18),
-            }
-          : p
-      )
-    );
-    setNotice("Revision uploaded. Coordinator and inspector notified.");
-  }
-
-  function postComment() {
-    if (!selectedIssue) return;
-
-    setProjects((prev) =>
-      prev.map((p) =>
-        p.id === selectedProjectId
-          ? {
-              ...p,
-              issues: p.issues.map((i) =>
-                i.id === selectedIssueId
-                  ? {
-                      ...i,
-                      comments: [
-                        ...i.comments,
-                        { author: role, text: "Demo response added to this issue thread." },
-                      ],
-                    }
-                  : i
-              ),
-            }
-          : p
-      )
-    );
-    setNotice("Comment added to the issue conversation.");
-  }
-
-  return (
-    <div className="demoApp">
-      <aside className="sidebar">
-        <a className="backHome" href="/">← Back to Website</a>
-        <div className="brand">AsBuiltFlow</div>
-        <span className="subbrand">Interactive Workflow Demo</span>
-
-        <label className="roleLabel">View demo as</label>
-        <select value={role} onChange={(e) => setRole(e.target.value)}>
-          <option>Inspector</option>
-          <option>Coordinator</option>
-          <option>Contractor</option>
-          <option>Admin</option>
-        </select>
-
-        <button className={view === "dashboard" ? "nav active" : "nav"} onClick={() => setView("dashboard")}>Dashboard</button>
-        <button className={view === "workflow" ? "nav active" : "nav"} onClick={() => setView("workflow")}>Workflow</button>
-        <button className={view === "issues" ? "nav active" : "nav"} onClick={() => setView("issues")}>All Issues</button>
-        <button className={view === "contractor" ? "nav active" : "nav"} onClick={() => setView("contractor")}>Contractor View</button>
-        <button className={view === "reports" ? "nav active" : "nav"} onClick={() => setView("reports")}>Reports</button>
-
-        <div className="demoBox">
-          <strong>Prototype</strong>
-          <span>No login required</span>
-        </div>
-      </aside>
-
-      <main className="main">
-        <div className="notice">🔔 {notice}</div>
-
-        {view === "dashboard" && (
-          <>
-            <Header title="Project Dashboard" subtitle={`Viewing as ${role}. Manage closeout packages from upload to approval.`} />
-
-            <div className="stats">
-              <Stat label="Active Closeouts" value={stats.active} />
-              <Stat label="Open Issues" value={stats.open} />
-              <Stat label="In Review" value={stats.review} />
-              <Stat label="Approved Items" value={stats.approved} />
-            </div>
-
-            <section className="panel">
-              <div className="panelTop">
-                <div>
-                  <h2>Active Closeouts</h2>
-                  <p>Monitor contractor submissions, review status, revisions, and open issues.</p>
-                </div>
-                <button className="primary" onClick={() => setNotice("New closeout creation would open here.")}>+ New Closeout</button>
-              </div>
-
-              {projects.map((project) => (
-                <div className="projectRow" key={project.id}>
-                  <div>
-                    <h3>{project.name}</h3>
-                    <p>{project.contractor} • {project.version} • Due {project.due}</p>
-                  </div>
-
-                  <div className="progressWrap">
-                    <span>{project.progress}% complete</span>
-                    <div className="progressBar"><div style={{ width: `${project.progress}%` }} /></div>
-                  </div>
-
-                  <Badge text={project.status} />
-                  <button onClick={() => openProject(project.id)}>Open</button>
-                </div>
-              ))}
-            </section>
-          </>
-        )}
-
-        {view === "workflow" && (
-          <>
-            <Header title="Workflow Overview" subtitle="The common OSP closeout path from contractor upload to final approval." />
-            <section className="workflowPanel">
-              {["Submitted", "Coordinator Review", "Ready for Inspection", "Inspector Review", "Needs Rework", "Revision Submitted", "Approved"].map((step) => (
-                <div className="workflowStep" key={step}>{step}</div>
-              ))}
-            </section>
-          </>
-        )}
-
-        {view === "project" && selectedProject && (
-          <>
-            <button className="back" onClick={() => setView("dashboard")}>← Back</button>
-            <Header title={selectedProject.name} subtitle={`${selectedProject.contractor} • ${selectedProject.status} • ${selectedProject.version}`} />
-
-            <div className="workspaceGrid">
-              <section className="panel">
-                <div className="panelTop">
-                  <div>
-                    <h2>Plan Review</h2>
-                    <p>Click issue pins to review corrections tied to this sheet.</p>
-                  </div>
-                  <button className="primary" onClick={uploadRevision}>Upload Revision</button>
-                </div>
-
-                <div className="sheetToolbar">
-                  <button onClick={() => setNotice("Previous sheet opened.")}>← Previous</button>
-                  <strong>Sheet 12 of 48</strong>
-                  <button onClick={() => setNotice("Next sheet opened.")}>Next →</button>
-                </div>
-
-                <div className="planSheet">
-                  <strong>AS-BUILT PLAN • SHEET 12</strong>
-                  <div className="route one" />
-                  <div className="route two" />
-                  <button className="pin red" onClick={() => openIssue(selectedProject.id, 23)}>23</button>
-                  <button className="pin yellow" onClick={() => openIssue(selectedProject.id, 24)}>24</button>
-                  <div className="hh hh1">HH-14</div>
-                  <div className="hh hh2">HH-18</div>
-                </div>
-              </section>
-
-              <section className="panel">
-                <h2>Project Actions</h2>
-                <div className="actions">
-                  <button onClick={() => updateProjectStatus("Coordinator Review")}>Coordinator Review</button>
-                  <button onClick={() => updateProjectStatus("Ready for Inspection")}>Ready for Inspection</button>
-                  <button onClick={() => updateProjectStatus("Needs Rework")}>Needs Rework</button>
-                  <button className="primary" onClick={() => updateProjectStatus("Approved")}>Approve</button>
-                </div>
-
-                <h2>Issue Queue</h2>
-                {selectedProject.issues.map((issue) => (
-                  <div className="issueCard" key={issue.id}>
-                    <div>
-                      <h3>#{issue.id} — {issue.title}</h3>
-                      <p>{issue.sheet} • Assigned to {issue.assignedTo}</p>
-                    </div>
-                    <Badge text={issue.status} />
-                    <button onClick={() => openIssue(selectedProject.id, issue.id)}>View</button>
-                  </div>
-                ))}
-
-                <h2>Revision History</h2>
-                {selectedProject.revisions.map((rev) => (
-                  <div className="revision" key={rev}>{rev}</div>
-                ))}
-              </section>
-            </div>
-          </>
-        )}
-
-        {view === "issue" && selectedIssue && selectedProject && (
-          <>
-            <button className="back" onClick={() => setView("project")}>← Back to Project</button>
-            <Header title={`Issue #${selectedIssue.id}`} subtitle={selectedIssue.title} />
-
-            <div className="workspaceGrid">
-              <section className="panel">
-                <h2>Issue Details</h2>
-                <Info label="Project" value={selectedProject.name} />
-                <Info label="Sheet" value={selectedIssue.sheet} />
-                <Info label="Priority" value={selectedIssue.priority} />
-                <Info label="Assigned To" value={selectedIssue.assignedTo} />
-                <Info label="Status" value={selectedIssue.status} />
-
-                <div className="actions">
-                  <button onClick={() => updateIssueStatus("Open")}>Mark Open</button>
-                  <button onClick={() => updateIssueStatus("Ready for Review")}>Ready for Review</button>
-                  <button className="primary" onClick={() => updateIssueStatus("Closed")}>Close Issue</button>
-                </div>
-              </section>
-
-              <section className="panel">
-                <h2>Issue Conversation</h2>
-                {selectedIssue.comments.map((comment, index) => (
-                  <div className="comment" key={index}>
-                    <strong>{comment.author}</strong>
-                    <p>{comment.text}</p>
-                  </div>
-                ))}
-                <textarea placeholder="Type a response..." />
-                <button className="primary" onClick={postComment}>Post Comment</button>
-              </section>
-            </div>
-          </>
-        )}
-
-        {view === "issues" && (
-          <>
-            <Header title="All Issues" subtitle="Every correction across active closeout packages." />
-            <section className="panel">
-              {allIssues.map((issue) => (
-                <div className="issueCard" key={`${issue.project}-${issue.id}`}>
-                  <div>
-                    <h3>#{issue.id} — {issue.title}</h3>
-                    <p>{issue.project} • {issue.sheet} • {issue.contractor}</p>
-                  </div>
-                  <Badge text={issue.status} />
-                  <button onClick={() => openIssue(issue.projectId, issue.id)}>Open</button>
-                </div>
-              ))}
-            </section>
-          </>
-        )}
-
-        {view === "contractor" && (
-          <>
-            <Header title="Contractor View" subtitle="Contractors can see assigned corrections and upload revisions." />
-            <section className="panel">
-              {allIssues.filter((i) => i.status !== "Closed").map((issue) => (
-                <div className="issueCard" key={issue.id}>
-                  <div>
-                    <h3>{issue.contractor}</h3>
-                    <p>#{issue.id} — {issue.title}</p>
-                  </div>
-                  <Badge text={issue.status} />
-                  <button className="primary" onClick={() => {
-                    setSelectedProjectId(issue.projectId);
-                    uploadRevision();
-                  }}>Upload Revision</button>
-                </div>
-              ))}
-            </section>
-          </>
-        )}
-
-        {view === "reports" && (
-          <>
-            <Header title="Reports" subtitle="Closeout visibility across active projects." />
-            <div className="stats">
-              <Stat label="Active Projects" value={stats.active} />
-              <Stat label="Total Issues" value={allIssues.length} />
-              <Stat label="Open Issues" value={stats.open} />
-              <Stat label="Closed Issues" value={stats.approved} />
-            </div>
-          </>
-        )}
-      </main>
-    </div>
-  );
-}
-
-function Header({ title, subtitle }) {
-  return (
-    <div className="header">
-      <span className="kicker">Telecom As-Built Workflow</span>
-      <h1>{title}</h1>
-      <p>{subtitle}</p>
-    </div>
-  );
-}
-
-function Stat({ label, value }) {
-  return (
-    <div className="stat">
-      <span>{label}</span>
-      <strong>{value}</strong>
-    </div>
-  );
-}
-
-function Badge({ text }) {
-  return <span className={`badge ${text.toLowerCase().replaceAll(" ", "-")}`}>{text}</span>;
-}
-
-function Info({ label, value }) {
-  return <p><strong>{label}:</strong> {value}</p>;
+export default function Demo(){
+ const [page,setPage]=useState('dashboard');
+ const [role,setRole]=useState('Inspector');
+ const [projects,setProjects]=useState(projectsSeed);
+ const [selected,setSelected]=useState(null);
+ const [notice,setNotice]=useState('Explore the same workspace pilot customers use. Demo changes reset when you leave.');
+ const issues=useMemo(()=>projects.flatMap(p=>p.issues.map(i=>({...i,project:p}))),[projects]);
+ const project=projects.find(p=>p.id===selected);
+ function openProject(id){setSelected(id);setPage('project')}
+ function demoAction(message){setNotice(message)}
+ function moveStatus(){setProjects(x=>x.map(p=>p.id===selected?{...p,status:'needs_rework',progress:80}:p));setNotice('Demo project moved to Needs Rework. No real data was changed.')}
+ return <div className="rwShell">
+  <aside className="rwSidebar open">
+   <div className="rwBrand"><a href="/">AsBuiltFlow</a><small>TELECOM CLOSEOUT PLATFORM</small></div>
+   <div className="rwOrg"><span>DEMO WORKSPACE</span><strong>Sample Telecom Team</strong></div>
+   <div className="rwDemoControl"><label>View demo as</label><select value={role} onChange={e=>setRole(e.target.value)}><option>Inspector</option><option>Coordinator</option><option>Contractor</option><option>Project Manager</option></select></div>
+   <nav>{navItems.map(([id,icon,label])=><button key={id} className={page===id?'active':''} onClick={()=>{setPage(id);setSelected(null)}}><i>{icon}</i>{label}</button>)}</nav>
+   <div className="rwPilot"><span>INTERACTIVE DEMO</span><strong>Same software. Sample data.</strong><p>Explore the real workflow without creating an account.</p></div>
+   <div className="rwUser"><b>GB</b><div><strong>Demo User</strong><small>{role}</small></div></div>
+  </aside>
+  <main className="rwMain">
+   <div className="rwDemoBanner">Demo Mode — sample data only. Changes are not saved.<a href="/app">Sign in to AsBuiltFlow</a></div>
+   <header className="rwTop"><div className="rwSearch">⌕<input placeholder="Search projects, contractors, or project numbers" onChange={e=>{const q=e.target.value.toLowerCase();if(q) setNotice(`Searching sample workspace for “${e.target.value}”` )}}/></div><a href="/">Website</a><button className="rwBell" onClick={()=>demoAction('All demo notifications marked as read.')}>●<em>3</em></button></header>
+   <div className="rwContent">
+    <div className="rwDemoNotice">{notice}</div>
+    {page==='dashboard'&&<><Header eyebrow={`${role} workspace`} title="Closeout dashboard" text="Monitor package status, assignments, corrections, revisions, and approvals." action={<button className="rwPrimary" onClick={()=>demoAction('In the live workspace, this opens the new project form.')}>+ New project</button>}/><div className="rwKpis"><div><span>Active projects</span><strong>2</strong></div><div><span>Awaiting review</span><strong>2</strong></div><div><span>Open issues</span><strong>3</strong></div><div><span>Approved</span><strong>1</strong></div></div><div className="rwGrid"><Panel title="Projects needing action"><div className="rwCards">{projects.slice(0,3).map(p=><button className="rwProjectCard" key={p.id} onClick={()=>openProject(p.id)}><div><strong>{p.name}</strong><small>{p.project_number} · {p.contractor}</small></div><span className={`rwStatus ${p.status}`}>{labels[p.status]||'Needs Rework'}</span><progress value={p.progress} max="100"/><small>{p.progress}% · Due {p.due}</small></button>)}</div></Panel><Panel title="Issues needing attention"><div className="rwCards">{issues.map(i=><button className="rwIssueCard" key={i.id} onClick={()=>{setSelected(i.project.id);setPage('project')}}><span className={`rwPriority ${i.priority}`}>{i.priority}</span><strong>#{i.n} {i.title}</strong><small>{i.project.name} · {i.sheet}</small><b>{labels[i.status]}</b></button>)}</div></Panel></div></>}
+    {page==='projects'&&<><Header eyebrow="Project portfolio" title="Projects" text="Create, assign, review, and close out telecom construction packages."/><Panel title={`${projects.length} projects`}><div className="rwTable"><div className="rwTr rwTh"><span>Project</span><span>Contractor</span><span>Status</span><span>Inspector</span><span>Due</span></div>{projects.map(p=><button className="rwTr" key={p.id} onClick={()=>openProject(p.id)}><span><strong>{p.name}</strong><small>{p.project_number}</small></span><span>{p.contractor}</span><span><i className={`rwStatus ${p.status}`}>{labels[p.status]||'Needs Rework'}</i></span><span>{p.inspector}</span><span>{p.due}</span></button>)}</div></Panel></>}
+    {page==='issues'&&<><Header eyebrow="Correction tracking" title="Issues" text="Track every correction from discovery through resolution."/><Panel title={`${issues.length} issues`}><div className="rwTable issues"><div className="rwTr rwTh"><span>Issue</span><span>Project</span><span>Sheet</span><span>Priority</span><span>Status</span></div>{issues.map(i=><button className="rwTr" key={i.id} onClick={()=>openProject(i.project.id)}><span><strong>#{i.n} {i.title}</strong><small>{i.description}</small></span><span>{i.project.name}</span><span>{i.sheet}</span><span><i className={`rwPriority ${i.priority}`}>{i.priority}</i></span><span><i className={`rwStatus ${i.status}`}>{labels[i.status]}</i></span></button>)}</div></Panel></>}
+    {page==='files'&&<><Header eyebrow="Document control" title="Files & photos" text="Private project documents, field photos, and revision history."/><Panel title="5 files"><div className="rwTable"><div className="rwTr rwTh"><span>File</span><span>Project</span><span>Category</span><span>Date</span><span/></div>{[['Bedford_Redlines_Rev3.pdf','Bedford Fiber Expansion','Revision 3'],['HH14_Depth_Photo.jpg','Bedford Fiber Expansion','Field Photo'],['Bloomington_AsBuilt_Rev1.pdf','Bloomington FTTH Build','As-Built PDF']].map((f,i)=><div className="rwTr" key={f[0]}><span><strong>{f[0]}</strong><small>{i===1?'2.4 MB':'8.1 MB'}</small></span><span>{f[1]}</span><span>{f[2]}</span><span>Jul {22-i}, 2026</span><span><button className="rwLink" onClick={()=>demoAction('The live workspace opens a secure, expiring file link.')}>Open</button></span></div>)}</div></Panel></>}
+    {page==='reports'&&<><Header eyebrow="Portfolio reporting" title="Reports" text="Monitor throughput, open corrections, approvals, and upcoming deadlines." action={<button className="rwPrimary" onClick={()=>demoAction('A sample CSV export would download in the live workspace.')}>Export CSV</button>}/><div className="rwGrid"><Panel title="Workflow snapshot"><div className="rwBars">{[['Coordinator Review',1],['Inspector Review',1],['Needs Rework',0],['Approved',1]].map(([l,c])=><div key={l}><span>{l}</span><b>{c}</b><i><em style={{width:`${Math.max(4,c*33)}%`}}/></i></div>)}</div></Panel><Panel title="Pilot KPIs"><div className="rwReportKpis"><div><span>Projects</span><strong>3</strong></div><div><span>Open issues</span><strong>3</strong></div><div><span>Approval rate</span><strong>33%</strong></div><div><span>Overdue</span><strong>0</strong></div></div></Panel></div></>}
+    {page==='activity'&&<><Header eyebrow="Audit history" title="Activity" text="A traceable record of project actions across your organization."/><Panel title="Recent events"><div className="rwTimeline">{['Gage moved Bedford Fiber Expansion to Inspector Review','ABC Construction uploaded Revision 3','Morgan created issue #31: Missing stationing','Gage approved Monroe County Backbone'].map((a,i)=><div key={a}><i>✓</i><span><strong>{a}</strong><small>Jul {23-i}, 2026</small></span></div>)}</div></Panel></>}
+    {page==='project'&&project&&<><button className="rwBack" onClick={()=>setPage('projects')}>← Back to projects</button><Header eyebrow={project.project_number} title={project.name} text={`${project.contractor} · Sample closeout package`}/><section className="rwWorkflow"><header><span>CLOSEOUT WORKFLOW</span><strong>{labels[project.status]||'Needs Rework'}</strong></header><div>{['Draft','Submitted','Coordinator Review','Ready for Inspection','Inspector Review','Needs Rework','Revision Submitted','Approved','Closed'].map((s,i)=><button key={s} className={s===(labels[project.status]||'Needs Rework')?'current':''} onClick={()=>s==='Needs Rework'?moveStatus():demoAction(`${s} selected in demo mode.`)}><b>{i+1}</b><span>{s}</span></button>)}</div></section><div className="rwKpis"><div><span>Progress</span><strong>{project.progress}%</strong></div><div><span>Open issues</span><strong>{project.issues.length}</strong></div><div><span>Latest revision</span><strong>R3</strong></div><div><span>Due date</span><strong>{project.due}</strong></div></div><div className="rwActions">{[['PDF','Upload as-built'],['IMG','Take / upload photos'],['R+','Upload revision'],['+','Create issue']].map(([icon,label])=><button key={label} onClick={()=>demoAction(`${label} is enabled after signing into the live workspace.`)}><b>{icon}</b><span><strong>{label}</strong><small>Interactive in the live workspace</small></span></button>)}</div><div className="rwGrid"><Panel title="Issues"><div className="rwCards">{project.issues.map(i=><button className="rwIssueRow" key={i.id} onClick={()=>demoAction(`Opened issue #${i.n}: ${i.title}`)}><span><strong>#{i.n} {i.title}</strong><small>{i.sheet} · {i.priority}</small></span><i className={`rwStatus ${i.status}`}>{labels[i.status]}</i></button>)}</div></Panel><Panel title="Closeout checklist"><div className="rwChecklist">{['As-built PDF uploaded','Required field photos uploaded','Fiber counts and stationing verified','All open issues resolved','Final package approved'].map((x,i)=><label key={x}><input type="checkbox" defaultChecked={i<2} onChange={()=>demoAction('Checklist updated in demo mode.')}/><span><strong>{x}</strong><small>{i<2?'Completed':'Required before final approval'}</small></span></label>)}</div></Panel></div></>}
+   </div>
+  </main>
+ </div>
 }
