@@ -81,10 +81,13 @@ export default function ProtectedWorkspace() {
 
   if (!isSupabaseConfigured) {
     return (
-      <div style={{padding:'48px',fontFamily:'Inter,system-ui',maxWidth:'760px',margin:'0 auto'}}>
-        <h1>Supabase setup required</h1>
-        <p>Create a <code>.env.local</code> file beside <code>package.json</code> and add your VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY values.</p>
-        <p><a href="/demo">Open the interactive demo instead</a></p>
+      <div className="rwCenter" style={{padding:'28px',textAlign:'center'}}>
+        <div style={{maxWidth:520,background:'#fff',border:'1px solid #dfe7f1',borderRadius:18,padding:'30px',boxShadow:'0 18px 50px rgba(15,23,42,.08)'}}>
+          <div style={{fontWeight:900,fontSize:24,letterSpacing:'-.03em'}}>AsBuiltFlow</div>
+          <h1 style={{fontSize:26,margin:'22px 0 10px'}}>Workspace temporarily unavailable</h1>
+          <p style={{color:'#64748b',lineHeight:1.6,margin:'0 0 20px'}}>The secure workspace is not connected right now. Please try again shortly or explore the interactive product demo.</p>
+          <a className="rwPrimary" style={{display:'inline-block',textDecoration:'none'}} href="/demo">Open interactive demo</a>
+        </div>
       </div>
     );
   }

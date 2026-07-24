@@ -13,6 +13,7 @@ const Header=({eyebrow,title,text,action})=><div className="rwPageHeader"><div><
 
 export default function Demo(){
  const [page,setPage]=useState('dashboard');
+ const [sidebarOpen,setSidebarOpen]=useState(false);
  const [role,setRole]=useState('Inspector');
  const [projects,setProjects]=useState(projectsSeed);
  const [selected,setSelected]=useState(null);
@@ -22,18 +23,19 @@ export default function Demo(){
  function openProject(id){setSelected(id);setPage('project')}
  function demoAction(message){setNotice(message)}
  function moveStatus(){setProjects(x=>x.map(p=>p.id===selected?{...p,status:'needs_rework',progress:80}:p));setNotice('Demo project moved to Needs Rework. No real data was changed.')}
- return <div className="rwShell">
-  <aside className="rwSidebar open">
+ return <div className="rwShell rwDemoShell">
+  {sidebarOpen&&<button className="rwSidebarScrim" aria-label="Close navigation" onClick={()=>setSidebarOpen(false)}/>}
+  <aside className={`rwSidebar ${sidebarOpen?'open':''}`}>
    <div className="rwBrand"><a href="/">AsBuiltFlow</a><small>TELECOM CLOSEOUT PLATFORM</small></div>
    <div className="rwOrg"><span>DEMO WORKSPACE</span><strong>Sample Telecom Team</strong></div>
    <div className="rwDemoControl"><label>View demo as</label><select value={role} onChange={e=>setRole(e.target.value)}><option>Inspector</option><option>Coordinator</option><option>Contractor</option><option>Project Manager</option></select></div>
-   <nav>{navItems.map(([id,icon,label])=><button key={id} className={page===id?'active':''} onClick={()=>{setPage(id);setSelected(null)}}><i>{icon}</i>{label}</button>)}</nav>
+   <nav>{navItems.map(([id,icon,label])=><button key={id} className={page===id?'active':''} onClick={()=>{setPage(id);setSelected(null);setSidebarOpen(false)}}><i>{icon}</i>{label}</button>)}</nav>
    <div className="rwPilot"><span>INTERACTIVE DEMO</span><strong>Same software. Sample data.</strong><p>Explore the real workflow without creating an account.</p></div>
    <div className="rwUser"><b>GB</b><div><strong>Demo User</strong><small>{role}</small></div></div>
   </aside>
   <main className="rwMain">
    <div className="rwDemoBanner">Demo Mode — sample data only. Changes are not saved.<a href="/app">Sign in to AsBuiltFlow</a></div>
-   <header className="rwTop"><div className="rwSearch">⌕<input placeholder="Search projects, contractors, or project numbers" onChange={e=>{const q=e.target.value.toLowerCase();if(q) setNotice(`Searching sample workspace for “${e.target.value}”` )}}/></div><a href="/">Website</a><button className="rwBell" onClick={()=>demoAction('All demo notifications marked as read.')}>●<em>3</em></button></header>
+   <header className="rwTop"><button className="rwMenu" aria-label="Open navigation" onClick={()=>setSidebarOpen(true)}>☰</button><div className="rwSearch">⌕<input placeholder="Search projects, contractors, or project numbers" onChange={e=>{const q=e.target.value.toLowerCase();if(q) setNotice(`Searching sample workspace for “${e.target.value}”` )}}/></div><a href="/">Website</a><button className="rwBell" onClick={()=>demoAction('All demo notifications marked as read.')}>●<em>3</em></button></header>
    <div className="rwContent">
     <div className="rwDemoNotice">{notice}</div>
     {page==='dashboard'&&<><Header eyebrow={`${role} workspace`} title="Closeout dashboard" text="Monitor package status, assignments, corrections, revisions, and approvals." action={<button className="rwPrimary" onClick={()=>demoAction('In the live workspace, this opens the new project form.')}>+ New project</button>}/><div className="rwKpis"><div><span>Active projects</span><strong>2</strong></div><div><span>Awaiting review</span><strong>2</strong></div><div><span>Open issues</span><strong>3</strong></div><div><span>Approved</span><strong>1</strong></div></div><div className="rwGrid"><Panel title="Projects needing action"><div className="rwCards">{projects.slice(0,3).map(p=><button className="rwProjectCard" key={p.id} onClick={()=>openProject(p.id)}><div><strong>{p.name}</strong><small>{p.project_number} · {p.contractor}</small></div><span className={`rwStatus ${p.status}`}>{labels[p.status]||'Needs Rework'}</span><progress value={p.progress} max="100"/><small>{p.progress}% · Due {p.due}</small></button>)}</div></Panel><Panel title="Issues needing attention"><div className="rwCards">{issues.map(i=><button className="rwIssueCard" key={i.id} onClick={()=>{setSelected(i.project.id);setPage('project')}}><span className={`rwPriority ${i.priority}`}>{i.priority}</span><strong>#{i.n} {i.title}</strong><small>{i.project.name} · {i.sheet}</small><b>{labels[i.status]}</b></button>)}</div></Panel></div></>}
