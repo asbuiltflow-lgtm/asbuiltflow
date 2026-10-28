@@ -14,3 +14,4 @@ body {
 a {
   color: inherit;
 }
+.abfOfficialLogo{display:block;width:300px;max-width:100%;height:auto;object-fit:contain;background:#fff;border-radius:8px}.abfMarketingLogo{width:190px;border-radius:0}.abfOfficialIcon{display:inline-block;width:32px;height:32px;object-fit:contain;background:#fff;border-radius:7px;flex-shrink:0}.rwBrand>a,.sidebarBrand .mvpLogo{display:flex;align-items:center;gap:8px}.authLogo,.loginLogo{display:inline-block;max-width:100%;align-self:flex-start}@media(max-width:600px){.abfOfficialLogo{width:250px}.abfMarketingLogo{width:150px}.abfOfficialIcon{width:28px;height:28px}}

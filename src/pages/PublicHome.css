@@ -1,0 +1,205 @@
+.marketingSite {
+  --marketing-ink: #0b1730;
+  --marketing-muted: #5b6980;
+  --marketing-border: #dce4ee;
+  --marketing-canvas: #f4f7fb;
+  --marketing-blue: #245eea;
+  --marketing-teal: #209b89;
+  min-height: 100vh;
+  color: var(--marketing-ink);
+  background: #fff;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.marketingSite *, .marketingSite *::before, .marketingSite *::after { box-sizing: border-box; }
+.marketingSite a { color: inherit; }
+.marketingSite button { font: inherit; }
+.marketingSite :focus-visible { outline: 3px solid rgba(36, 94, 234, .42); outline-offset: 3px; }
+.marketingSite h1, .marketingSite h2, .marketingSite h3, .marketingSite p { margin-top: 0; }
+
+.marketingSkipLink { position: absolute; z-index: 20; top: 8px; left: 8px; padding: 10px 14px; transform: translateY(-150%); border-radius: 5px; background: #fff; color: var(--marketing-ink); }
+.marketingSkipLink:focus { transform: translateY(0); }
+.marketingHeader { position: sticky; z-index: 10; top: 0; display: flex; min-height: 78px; align-items: center; justify-content: space-between; gap: 28px; padding: 12px max(5vw, calc((100vw - 1240px) / 2)); border-bottom: 1px solid rgba(220, 228, 238, .9); background: rgba(255, 255, 255, .96); backdrop-filter: blur(12px); }
+.marketingBrand { display: inline-flex; flex: 0 1 auto; align-items: center; }
+.marketingBrand img { display: block; width: 208px; max-width: 100%; height: auto; }
+.marketingNav { display: flex; align-items: center; gap: clamp(16px, 2.4vw, 32px); }
+.marketingNav a { color: #42516a; font-size: 14px; font-weight: 650; text-decoration: none; white-space: nowrap; }
+.marketingNav a:hover, .marketingFooter nav a:hover { color: var(--marketing-blue); }
+.marketingNav .marketingSignIn { color: var(--marketing-ink); font-weight: 800; }
+.marketingNav .marketingDemoNav { color: #176e68; font-weight: 800; }
+.marketingMobileSignIn { display: none; font-size: 14px; font-weight: 800; text-decoration: none; }
+.marketingButton, .marketingButtonSecondary, .marketingButtonOutlineLight { display: inline-flex; min-height: 50px; align-items: center; justify-content: center; padding: 0 21px; border: 1px solid transparent; border-radius: 8px; font-size: 15px; font-weight: 800; line-height: 1.2; text-align: center; text-decoration: none; cursor: pointer; transition: background-color .16s ease, border-color .16s ease, transform .16s ease; }
+.marketingButton { background: var(--marketing-blue); color: #fff; box-shadow: 0 5px 14px rgba(36, 94, 234, .16); }
+.marketingButton:hover { transform: translateY(-1px); background: #164ed4; }
+.marketingButtonSmall { min-height: 42px; padding: 0 16px; font-size: 14px; }
+.marketingButtonSecondary { border-color: #cbd6e5; background: #fff; color: var(--marketing-ink); }
+.marketingButtonSecondary:hover { border-color: #8da2c0; background: #f8fafc; }
+.marketingActions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.marketingDemoLink { display: inline-flex; align-items: center; gap: 9px; margin-top: 18px; color: #176e68 !important; font-size: 14px; font-weight: 800; text-decoration: none; }
+.marketingDemoLink:hover { text-decoration: underline; }
+
+.marketingHero { position: relative; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(360px, .9fr); gap: clamp(44px, 7vw, 96px); align-items: center; max-width: 1440px; min-height: 586px; margin: 0 auto; padding: 82px max(7vw, calc((100vw - 1240px) / 2)); overflow: hidden; background: linear-gradient(105deg, #f7fafc 0%, #f7fafc 58%, #edf4f8 100%); }
+.marketingHero::after { position: absolute; right: -180px; bottom: -360px; width: 620px; height: 620px; border: 1px solid rgba(32, 155, 137, .14); border-radius: 50%; content: ""; pointer-events: none; }
+.marketingHeroCopy, .workflowPreview { position: relative; z-index: 1; }
+.marketingEyebrow { display: flex; align-items: center; gap: 9px; margin-bottom: 18px; color: #235f7d; font-size: 12px; font-weight: 850; letter-spacing: .09em; text-transform: uppercase; }
+.marketingEyebrow > span { width: 8px; height: 8px; border-radius: 50%; background: var(--marketing-teal); }
+.marketingHero h1 { max-width: 720px; margin-bottom: 20px; font-size: clamp(44px, 5.6vw, 70px); font-weight: 780; letter-spacing: -.057em; line-height: 1.02; }
+.marketingLead { max-width: 620px; margin-bottom: 28px; color: #46566d; font-size: clamp(17px, 1.65vw, 20px); line-height: 1.65; }
+.marketingNote { max-width: 510px; margin: 22px 0 0; color: var(--marketing-muted); font-size: 13px; line-height: 1.6; }
+.workflowPreview { padding: 22px 24px 14px; border: 1px solid #d8e1ec; border-radius: 12px; background: #fff; box-shadow: 0 20px 54px rgba(12, 30, 59, .10); }
+.previewHeader { display: flex; min-height: 32px; align-items: flex-start; justify-content: space-between; gap: 12px; border-bottom: 1px solid #e8edf3; color: #61718a; font-size: 10px; font-weight: 850; letter-spacing: .1em; }
+.previewStatus { display: inline-flex; align-items: center; gap: 6px; color: #527064; font-size: 10px; font-weight: 700; letter-spacing: 0; }
+.previewStatus i { width: 7px; height: 7px; border-radius: 50%; background: var(--marketing-teal); }
+.previewSteps { margin: 0; padding: 5px 0 0; list-style: none; }
+.previewSteps li { display: grid; grid-template-columns: 34px 1fr 22px; gap: 12px; align-items: center; min-height: 78px; border-bottom: 1px solid #edf1f5; }
+.previewSteps li:last-child { border-bottom: 0; }
+.previewStepIcon { display: grid; width: 32px; height: 32px; place-items: center; border: 1px solid #d7e3ef; border-radius: 7px; background: #f3f7fb; color: #2d567b; font-size: 11px; font-weight: 850; }
+.previewSteps strong { display: block; color: #12233d; font-size: 14px; }
+.previewSteps small { display: block; margin-top: 4px; color: #718097; font-size: 12px; }
+.previewSteps li > b { color: #218d78; font-size: 18px; text-align: center; }
+.previewFootnote { margin: 9px 0 0; color: #758297; font-size: 11px; line-height: 1.5; }
+
+.marketingDemoSection { display: flex; align-items: center; justify-content: space-between; gap: 36px; padding: 46px max(7vw, calc((100vw - 1120px) / 2)); border-bottom: 1px solid #e8edf3; background: #fff; }
+.marketingDemoSection > div { max-width: 700px; }
+.marketingDemoSection .marketingEyebrow { margin-bottom: 10px; }
+.marketingDemoSection h2 { margin-bottom: 10px; font-size: clamp(25px, 3vw, 34px); letter-spacing: -.04em; line-height: 1.15; }
+.marketingDemoSection p:last-child { margin: 0; color: var(--marketing-muted); font-size: 14px; line-height: 1.7; }
+.marketingDemoSection .marketingButton { flex: 0 0 auto; gap: 10px; }
+
+.marketingSection, .marketingAudience, .marketingWorkflowSection { padding: 88px max(7vw, calc((100vw - 1120px) / 2)); }
+.sectionIntro { max-width: 570px; }
+.sectionIntro .marketingEyebrow { margin-bottom: 12px; }
+.sectionIntro h2, .marketingFinalCta h2 { margin-bottom: 16px; font-size: clamp(32px, 4vw, 46px); letter-spacing: -.045em; line-height: 1.1; }
+.sectionIntro > p:last-child { margin-bottom: 0; color: var(--marketing-muted); font-size: 16px; line-height: 1.7; }
+.benefitsSection { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(48px, 9vw, 130px); align-items: start; }
+.benefitList { border-top: 1px solid var(--marketing-border); }
+.benefitList article { display: grid; grid-template-columns: 44px 1fr; gap: 18px; padding: 23px 0; border-bottom: 1px solid var(--marketing-border); }
+.benefitList article > span { color: var(--marketing-teal); font-size: 12px; font-weight: 850; }
+.benefitList h3 { margin: 0 0 6px; font-size: 17px; letter-spacing: -.01em; }
+.benefitList p { margin: 0; color: var(--marketing-muted); font-size: 14px; line-height: 1.65; }
+
+.marketingWorkflowSection { background: var(--marketing-canvas); }
+.sectionIntroWide { max-width: 740px; }
+.marketingWorkflowGrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin: 38px 0 0; padding: 0; list-style: none; }
+.marketingWorkflowGrid li { position: relative; min-height: 205px; padding: 25px 22px 20px 0; border-top: 2px solid #c8d8e4; }
+.marketingWorkflowGrid li:not(:last-child)::after { position: absolute; top: -6px; right: 20px; width: 10px; height: 10px; border-radius: 50%; background: var(--marketing-teal); content: ""; }
+.workflowNumber { color: #277f7c; font-size: 12px; font-weight: 850; letter-spacing: .08em; }
+.marketingWorkflowGrid h3 { margin: 13px 14px 8px 0; font-size: 17px; letter-spacing: -.015em; }
+.marketingWorkflowGrid p { max-width: 240px; margin: 0 18px 0 0; color: var(--marketing-muted); font-size: 13px; line-height: 1.65; }
+.workflowSequence { display: flex; flex-wrap: wrap; align-items: center; gap: 11px; padding: 17px 18px; border: 1px solid #dbe5ee; border-radius: 8px; background: rgba(255, 255, 255, .78); color: #354b66; font-size: 12px; font-weight: 750; }
+.workflowSequence b { color: #208e82; font-size: 16px; }
+
+.productSection { display: grid; grid-template-columns: .85fr 1.15fr; gap: 54px 100px; align-items: start; }
+.productDetails { padding: 24px 26px; border: 1px solid var(--marketing-border); border-radius: 10px; background: #fff; box-shadow: 0 8px 24px rgba(15, 34, 60, .04); }
+.productDetailHeading { display: flex; align-items: center; gap: 13px; padding-bottom: 18px; border-bottom: 1px solid #e8edf3; }
+.detailIcon { display: grid; width: 38px; height: 38px; place-items: center; border-radius: 8px; background: #eaf4f3; color: #1c8177; font-size: 20px; font-weight: 800; }
+.productDetailHeading strong { display: block; font-size: 15px; }
+.productDetailHeading p { margin: 3px 0 0; color: var(--marketing-muted); font-size: 12px; }
+.productDetails ul { display: grid; grid-template-columns: 1fr 1fr; gap: 0 22px; margin: 16px 0; padding: 0; list-style: none; }
+.productDetails li { display: flex; gap: 9px; padding: 9px 0; color: #3e4d64; font-size: 13px; line-height: 1.5; }
+.productDetails li span { flex: 0 0 auto; color: #168e7e; font-weight: 900; }
+.textLink { display: inline-flex; align-items: center; gap: 9px; margin-top: 4px; color: var(--marketing-blue) !important; font-size: 14px; font-weight: 800; text-decoration: none; }
+.textLink:hover { text-decoration: underline; }
+.productLinks { display: grid; justify-items: start; gap: 11px; }
+.productCaption { grid-column: 1 / -1; margin: -40px 0 0; color: #76849a; font-size: 12px; line-height: 1.6; }
+
+.marketingAudience { background: #f7f9fc; }
+.marketingAudience > .sectionIntro { max-width: 740px; }
+.roleGrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin-top: 32px; }
+.roleGrid article { padding-top: 16px; border-top: 2px solid #b9d7d5; }
+.roleGrid h3 { margin: 0 0 8px; font-size: 15px; }
+.roleGrid p { margin: 0; color: var(--marketing-muted); font-size: 13px; line-height: 1.65; }
+.roleFootnote { margin: 26px 0 0; color: #6b7890; font-size: 12px; }
+
+.marketingPilotSection { display: grid; grid-template-columns: .8fr 1.2fr; gap: 44px 90px; align-items: start; padding: 82px max(7vw, calc((100vw - 1120px) / 2)); background: #fff; }
+.marketingPilotSection .sectionIntro h2 { font-size: clamp(30px, 3.8vw, 42px); }
+.pilotSteps { display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--marketing-border); }
+.pilotSteps li { display: grid; grid-template-columns: 35px 1fr; gap: 12px; padding: 19px 0; border-bottom: 1px solid var(--marketing-border); }
+.pilotSteps li > span { color: var(--marketing-teal); font-size: 12px; font-weight: 850; }
+.pilotSteps strong { color: var(--marketing-ink); font-size: 14px; }
+.pilotSteps p { margin: 5px 0 0; color: var(--marketing-muted); font-size: 13px; line-height: 1.6; }
+.pilotContact { grid-column: 2; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; }
+.pilotContact .textLink { margin: 0; padding: 0; border: 0; background: transparent; font-family: inherit; cursor: pointer; }
+.pilotContact > span { color: var(--marketing-muted); font-size: 13px; }
+.pilotContact > span a { color: #176e68; font-weight: 750; text-decoration: none; }
+.pilotContact > span a:hover { text-decoration: underline; }
+
+.marketingFinalCta { display: flex; align-items: center; justify-content: space-between; gap: 40px; padding: 64px max(7vw, calc((100vw - 1120px) / 2)); background: #0c1b34; color: #fff; }
+.marketingFinalCta > div:first-child { max-width: 650px; }
+.marketingFinalCta .marketingEyebrow { color: #8bd0c5; }
+.marketingFinalCta h2 { margin-bottom: 10px; font-size: clamp(30px, 3.5vw, 40px); }
+.marketingFinalCta p:last-child { margin: 0; color: #c4d0df; font-size: 15px; line-height: 1.6; }
+.marketingButtonLight { background: #fff; color: #10203b; box-shadow: none; }
+.marketingButtonLight:hover { background: #eaf1f7; }
+.marketingButtonOutlineLight { border-color: #73839a; background: transparent; color: #fff; }
+.marketingButtonOutlineLight:hover { border-color: #fff; background: rgba(255,255,255,.08); }
+
+.marketingFooter { display: grid; grid-template-columns: 1fr auto; gap: 22px 40px; align-items: center; padding: 27px max(5vw, calc((100vw - 1240px) / 2)); border-top: 1px solid #e4eaf1; background: #fff; }
+.footerBrandBlock { display: flex; align-items: center; gap: 11px; }
+.footerBrandBlock img { width: 36px; height: 36px; object-fit: cover; border-radius: 7px; }
+.footerBrandBlock strong, .footerBrandBlock span { display: block; }
+.footerBrandBlock strong { font-size: 14px; }
+.footerBrandBlock span { margin-top: 2px; color: var(--marketing-muted); font-size: 11px; }
+.marketingFooter nav { display: flex; flex-wrap: wrap; gap: 21px; }
+.marketingFooter nav a { color: #4d5b71; font-size: 12px; font-weight: 700; text-decoration: none; }
+.marketingFooter > small { grid-column: 1 / -1; padding-top: 14px; border-top: 1px solid #edf0f4; color: #758197; font-size: 11px; }
+
+@media (max-width: 900px) {
+  .marketingHeader { min-height: 70px; padding-right: 5vw; padding-left: 5vw; }
+  .marketingNav { gap: 16px; }
+  .marketingNav > a:not(.marketingSignIn) { display: none; }
+  .marketingHero { grid-template-columns: minmax(0, 1fr) minmax(300px, .85fr); gap: 32px; padding-right: 6vw; padding-left: 6vw; }
+  .marketingDemoSection, .marketingPilotSection { padding-right: 6vw; padding-left: 6vw; }
+  .marketingPilotSection { gap: 36px; }
+  .benefitsSection, .productSection { gap: 42px; }
+  .marketingSection, .marketingAudience, .marketingWorkflowSection { padding-right: 6vw; padding-left: 6vw; }
+  .marketingFinalCta { padding-right: 6vw; padding-left: 6vw; }
+}
+
+@media (max-width: 680px) {
+  .marketingHeader { min-height: 64px; padding: 9px 18px; }
+  .marketingBrand img { width: 155px; }
+  .marketingNav { gap: 10px; }
+  .marketingNav > a { display: none !important; }
+  .marketingNav .marketingButtonSmall { min-height: 39px; padding: 0 11px; font-size: 12px; }
+  .marketingMobileSignIn { display: inline-flex; margin-left: auto; margin-right: 8px; color: #293b57; }
+  .marketingHeader { flex-wrap: wrap; }
+  .marketingHeader .marketingNav { order: 2; }
+  .marketingHero { grid-template-columns: 1fr; gap: 34px; min-height: auto; padding: 58px 22px 48px; }
+  .marketingDemoSection { align-items: stretch; flex-direction: column; gap: 20px; padding: 42px 22px; }
+  .marketingDemoSection .marketingButton { align-self: flex-start; }
+  .marketingPilotSection { grid-template-columns: 1fr; gap: 26px; padding: 58px 22px; }
+  .pilotSteps { grid-template-columns: 1fr; }
+  .pilotContact { grid-column: auto; }
+  .marketingHero h1 { font-size: clamp(42px, 12vw, 58px); }
+  .marketingLead { font-size: 17px; }
+  .workflowPreview { padding: 18px 16px 12px; }
+  .previewSteps li { min-height: 70px; }
+  .marketingSection, .marketingAudience, .marketingWorkflowSection { padding: 58px 22px; }
+  .benefitsSection, .productSection { grid-template-columns: 1fr; gap: 28px; }
+  .marketingWorkflowGrid { grid-template-columns: 1fr 1fr; gap: 0 18px; margin-top: 24px; }
+  .marketingWorkflowGrid li { min-height: 190px; }
+  .marketingWorkflowGrid li:nth-child(2)::after { display: none; }
+  .workflowSequence { gap: 8px; padding: 14px; font-size: 11px; }
+  .productDetails { padding: 19px 16px; }
+  .productDetails ul { grid-template-columns: 1fr; }
+  .productCaption { grid-column: auto; margin: -12px 0 0; }
+  .roleGrid { grid-template-columns: 1fr 1fr; gap: 22px 18px; }
+  .marketingFinalCta { align-items: stretch; flex-direction: column; gap: 24px; padding: 50px 22px; }
+  .marketingFinalCta .marketingActions > * { flex: 1; }
+  .marketingFooter { grid-template-columns: 1fr; gap: 18px; padding: 23px 22px; }
+  .marketingFooter nav { gap: 16px; }
+  .marketingFooter > small { grid-column: auto; }
+}
+
+@media (max-width: 390px) {
+  .marketingBrand img { width: 135px; }
+  .marketingNav .marketingButtonSmall { padding: 0 9px; }
+  .marketingWorkflowGrid { grid-template-columns: 1fr; }
+  .marketingWorkflowGrid li { min-height: auto; padding-bottom: 28px; }
+  .marketingWorkflowGrid li::after { display: none; }
+  .roleGrid { grid-template-columns: 1fr; }
+  .marketingActions { align-items: stretch; flex-direction: column; }
+  .marketingActions > * { width: 100%; }
+}
+

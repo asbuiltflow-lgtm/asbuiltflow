@@ -54,7 +54,7 @@ export default function SetupPasswordPage() {
   return (
     <div className="authPage">
       <section className="authBrandPanel">
-        <a href="/" className="authLogo">AsBuiltFlow</a>
+        <a href="/" className="authLogo"><img className="abfOfficialLogo" src="/brand/asbuiltflow-logo.jpg" width="1280" height="426" alt="AsBuiltFlow" /></a>
         <div>
           <span>Secure account setup</span>
           <h1>Finish creating your workspace account.</h1>
@@ -65,7 +65,7 @@ export default function SetupPasswordPage() {
             <li>Secure document and revision history</li>
           </ul>
         </div>
-        <small>AsBuiltFlow controlled pilot</small>
+        <small>AsBuiltFlow™</small>
       </section>
       <section className="authCardWrap">
         <form className="authCard" onSubmit={submit}>

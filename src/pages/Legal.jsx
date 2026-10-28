@@ -34,8 +34,9 @@ export function Terms() {
       <p>Last updated: July 2026</p>
 
       <p>
-        AsBuiltFlow is currently an interactive prototype and early-stage product.
-        The demo is provided for evaluation and feedback purposes only.
+        AsBuiltFlow is an early-stage telecom construction closeout product. The
+        interactive demo is a simulation that uses fictional sample data; demo
+        actions do not change live application records.
       </p>
 
       <p>
@@ -44,7 +45,7 @@ export function Terms() {
       </p>
 
       <p>
-        Features shown in the prototype may change as the platform develops.
+        Features and availability may change as the platform develops.
         Use of AsBuiltFlow for paid services will require separate customer terms
         or agreement.
       </p>

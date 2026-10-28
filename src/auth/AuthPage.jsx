@@ -36,7 +36,7 @@ export default function AuthPage() {
   return (
     <div className="authPage">
       <section className="authBrandPanel">
-        <a href="/" className="authLogo">AsBuiltFlow</a>
+        <a href="/" className="authLogo"><img className="abfOfficialLogo" src="/brand/asbuiltflow-logo.jpg" width="1280" height="426" alt="AsBuiltFlow" /></a>
         <div>
           <span>Telecom closeout platform</span>
           <h1>One secure workflow from submission to final approval.</h1>
@@ -47,7 +47,7 @@ export default function AuthPage() {
             <li>Mobile photo uploads for field teams</li>
           </ul>
         </div>
-        <small>AsBuiltFlow early access</small>
+        <small>AsBuiltFlow™</small>
       </section>
 
       <section className="authCardWrap">
@@ -100,5 +100,5 @@ export function UpdatePasswordPage({ onComplete }) {
     setLoading(false);
     if (updateError) setError(updateError.message); else onComplete();
   }
-  return <div className="authPage"><section className="authBrandPanel"><a href="/" className="authLogo">AsBuiltFlow</a><div><span>Secure account recovery</span><h1>Create your new password.</h1><p>Choose a strong password for your AsBuiltFlow workspace account.</p></div><small>AsBuiltFlow early access</small></section><section className="authCardWrap"><form className="authCard" onSubmit={submit}><span className="authEyebrow">Password recovery</span><h2>Set a new password</h2><label>New password<input type="password" value={password} onChange={e=>setPassword(e.target.value)} minLength="8" required autoComplete="new-password"/></label><label>Confirm password<input type="password" value={confirm} onChange={e=>setConfirm(e.target.value)} minLength="8" required autoComplete="new-password"/></label>{error&&<div className="authAlert error">{error}</div>}<button disabled={loading}>{loading?'Saving…':'Save password'}</button></form></section></div>;
+  return <div className="authPage"><section className="authBrandPanel"><a href="/" className="authLogo"><img className="abfOfficialLogo" src="/brand/asbuiltflow-logo.jpg" width="1280" height="426" alt="AsBuiltFlow" /></a><div><span>Secure account recovery</span><h1>Create your new password.</h1><p>Choose a strong password for your AsBuiltFlow workspace account.</p></div><small>AsBuiltFlow™</small></section><section className="authCardWrap"><form className="authCard" onSubmit={submit}><span className="authEyebrow">Password recovery</span><h2>Set a new password</h2><label>New password<input type="password" value={password} onChange={e=>setPassword(e.target.value)} minLength="8" required autoComplete="new-password"/></label><label>Confirm password<input type="password" value={confirm} onChange={e=>setConfirm(e.target.value)} minLength="8" required autoComplete="new-password"/></label>{error&&<div className="authAlert error">{error}</div>}<button disabled={loading}>{loading?'Saving…':'Save password'}</button></form></section></div>;
 }

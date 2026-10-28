@@ -130,8 +130,8 @@ export default function ContactForm({
             </h2>
 
             <p>
-              Your message was sent successfully. I’ll review it and follow up
-              with you as soon as possible.
+              Your message was submitted. For other questions, email{" "}
+              <a href="mailto:hello@asbuiltflow.com">hello@asbuiltflow.com</a>.
             </p>
 
             <button
@@ -147,7 +147,7 @@ export default function ContactForm({
             <div className="contactFormHeader">
               <p className="contactEyebrow">
                 {isDemoRequest
-                  ? "Interactive prototype"
+                  ? "Request a Demo"
                   : "Contact AsBuiltFlow"}
               </p>
 
@@ -159,7 +159,7 @@ export default function ContactForm({
 
               <p>
                 {isDemoRequest
-                  ? "Share a few details about your current closeout process and what you would want from a production version of AsBuiltFlow."
+                  ? "Tell us a little about your team and closeout workflow to start a conversation about an AsBuiltFlow walkthrough."
                   : "Send feedback, questions, or information about the workflow your team currently uses."}
               </p>
             </div>
@@ -276,7 +276,7 @@ export default function ContactForm({
 
                   <textarea
                     name="desired_improvements"
-                    placeholder="For example: revision tracking, submissions, issue management, notifications, approvals, reporting, photos, or GIS."
+                    placeholder="For example: package revisions, evidence review, corrections, approvals, or closeout reporting."
                     rows="4"
                   />
                 </label>
@@ -300,9 +300,8 @@ export default function ContactForm({
 
               <div className="contactFormFooter">
                 <p>
-                  AsBuiltFlow is currently an interactive prototype. Submitting
-                  this form does not create an account or commit your company to
-                  anything.
+                  By submitting, you’re asking AsBuiltFlow to contact you about
+                  a demo. This does not create an account or commit your company.
                 </p>
 
                 <button

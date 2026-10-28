@@ -1,0 +1,151 @@
+/* Shared production UI foundations. Keep the established navy/blue identity. */
+:root {
+  color-scheme: light;
+  --abf-ink: #0f172a;
+  --abf-muted: #64748b;
+  --abf-border: #dfe7f1;
+  --abf-surface: #ffffff;
+  --abf-canvas: #f4f7fb;
+  --abf-blue: #2563eb;
+  --abf-radius-card: 16px;
+  --abf-radius-control: 10px;
+  --abf-shadow-card: 0 8px 24px rgba(15, 23, 42, .045);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body { line-height: 1.5; }
+button, input, select, textarea { font: inherit; }
+button:focus-visible, a:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible, summary:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, .35);
+  outline-offset: 2px;
+}
+button:disabled, input:disabled, select:disabled, textarea:disabled { cursor: not-allowed; }
+
+/* Authenticated workspace */
+.rwShell { color: var(--abf-ink); background: var(--abf-canvas); }
+.rwMain, .rwContent, .rwPanel, .rwGrid, .rwPageHeader { min-width: 0; }
+.rwContent { width: 100%; }
+.rwPageHeader { gap: 20px; }
+.rwPageHeader > div { min-width: 0; }
+.rwPageHeader > div > span, .rwWorkflow > header > span,
+.rwPanel > header > span, .rwOrg > span, .rwPilot > span {
+  text-transform: none;
+  letter-spacing: .035em;
+}
+.rwWorkflow > header > span { text-transform: lowercase; }
+.rwWorkflow > header > span::first-letter { text-transform: uppercase; }
+.rwBrand small, .rwOrg > span, .rwPilot > span {
+  text-transform: lowercase;
+  letter-spacing: .06em;
+}
+.rwBrand small::first-letter, .rwOrg > span::first-letter,
+.rwPilot > span::first-letter { text-transform: uppercase; }
+.rwKpis > div > span { text-transform: none; letter-spacing: .025em; }
+.rwPageHeader h1 { overflow-wrap: anywhere; }
+.rwPageHeader p, .rwPanel p, .rwDescription { line-height: 1.6; }
+.rwPrimary, .rwSecondary, .rwLink, .rwBack, .rwMenu, .rwBell,
+.rwLogout, .rwModal > header button, .rwDanger {
+  min-height: 40px;
+  transition: background-color .16s ease, border-color .16s ease,
+    color .16s ease, box-shadow .16s ease, transform .16s ease;
+}
+.rwPrimary:focus-visible, .rwSecondary:focus-visible, .rwLink:focus-visible,
+.rwDanger:focus-visible, .rwMenu:focus-visible, .rwBell:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, .35);
+  outline-offset: 2px;
+}
+.rwPrimary:disabled, .rwSecondary:disabled, .rwLink:disabled {
+  opacity: .58;
+  box-shadow: none;
+  transform: none;
+}
+.rwPanel { border-color: var(--abf-border); border-radius: var(--abf-radius-card); box-shadow: var(--abf-shadow-card); }
+.rwPanel > header { border-bottom-color: #e8edf4; }
+.rwStatus, .rwPriority {
+  min-height: 26px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 4px 9px;
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 800;
+  text-transform: none;
+  white-space: normal;
+  text-align: center;
+}
+.rwStatus.approved, .rwStatus.closed, .rwStatus.active, .rwStatus.accepted,
+.rwStatus.released, .rwStatus.resolved {
+  background: #ecfdf3;
+  border-color: #bbf7d0;
+  color: #166534;
+}
+.rwStatus.needs_rework, .rwStatus.rejected, .rwStatus.blocked,
+.rwStatus.open, .rwStatus.deactivated {
+  background: #fff1f0;
+  border-color: #fecaca;
+  color: #b42318;
+}
+.rwStatus.submitted, .rwStatus.pending, .rwStatus.coordinator_review,
+.rwStatus.inspector_review, .rwStatus.ready_for_inspection,
+.rwStatus.revision_submitted, .rwStatus.awaiting_review {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  color: #1d4ed8;
+}
+.rwStatus.draft, .rwStatus.in_construction, .rwStatus.initial_package,
+.rwStatus.superseded, .rwStatus.not_configured {
+  background: #f1f5f9;
+  border-color: #e2e8f0;
+  color: #475569;
+}
+.rwTable { max-width: 100%; }
+.rwTr > span { overflow-wrap: anywhere; }
+.rwTh { position: sticky; top: 0; z-index: 1; }
+.rwEmpty { border: 1px dashed #cbd5e1; border-radius: 12px; background: #fbfdff; line-height: 1.55; }
+.rwAlert { line-height: 1.5; }
+.rwModal { border: 1px solid #e2e8f0; }
+.rwForm { gap: 16px; }
+.rwForm label { min-width: 0; }
+.rwForm input, .rwForm select, .rwForm textarea { min-width: 0; min-height: 44px; border-radius: var(--abf-radius-control); }
+.rwForm textarea { min-height: 100px; }
+.rwForm input[type="checkbox"] { width: 18px; min-height: 18px; accent-color: var(--abf-blue); }
+.coLifecycle { border-color: var(--abf-border); border-radius: var(--abf-radius-card); }
+.coLifecycle .coEditor { border-color: #e6ebf2; border-radius: 12px; }
+.coCategory, .coLifecycleList > strong { text-transform: none; letter-spacing: .035em; }
+.coCurrentPackage { box-shadow: 0 8px 24px rgba(37, 99, 235, .08); }
+.coBlockers { line-height: 1.55; }
+.coHistory summary, .coLifecycle details summary { min-height: 36px; padding: 8px 0; }
+
+/* Sign-in and password setup */
+.authPage { min-height: 100svh; }
+.authBrandPanel { gap: clamp(36px, 7vh, 72px); }
+.authCard { width: min(100%, 480px); }
+.authCard label { gap: 8px; }
+.authCard input { min-height: 46px; }
+.authCard button[type="submit"] { min-height: 46px; }
+
+/* Marketing page and dialogs */
+.site :is(a, button, input, select, textarea):focus-visible {
+  outline: 3px solid rgba(37, 99, 235, .35);
+  outline-offset: 3px;
+}
+.contactModal { width: min(720px, 100%); }
+
+@media (max-width: 760px) {
+  .rwHeaderActions { display: grid; grid-template-columns: 1fr 1fr; }
+  .rwHeaderActions > * { min-width: 0; }
+  .rwWorkflow > div { padding-bottom: 8px; }
+  .rwModalBack { align-items: start; overflow-y: auto; }
+  .rwModal { max-height: calc(100svh - 24px); margin: 0; }
+  .rwTr { min-width: 640px; }
+  .rwTable.issues .rwTr { min-width: 720px; }
+  .coLifecycle table { display: block; overflow-x: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+

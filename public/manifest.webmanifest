@@ -1,0 +1,12 @@
+{
+  "name": "AsBuiltFlow",
+  "short_name": "AsBuiltFlow",
+  "start_url": "/app",
+  "display": "browser",
+  "background_color": "#ffffff",
+  "theme_color": "#071124",
+  "icons": [
+    { "src": "/brand/asbuiltflow-icon.jpg", "sizes": "1254x1254", "type": "image/jpeg", "purpose": "any" }
+  ]
+}
+

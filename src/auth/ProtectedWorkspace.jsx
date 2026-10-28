@@ -18,8 +18,11 @@ export default function ProtectedWorkspace() {
     if (!isSupabaseConfigured) return undefined;
 
     let mounted = true;
+    let profileRequest = 0;
 
     async function loadProfile(activeSession) {
+      const request = ++profileRequest;
+      setProfileError('');
       if (!activeSession?.user) {
         if (mounted) {
           setProfile(null);
@@ -29,29 +32,26 @@ export default function ProtectedWorkspace() {
       }
 
       const user = activeSession.user;
-      let { data, error } = await supabase
+      const { data, error } = await supabase
         .from('profiles')
         .select('id, full_name, email, role, organization_id, contractor_company_id, active')
         .eq('id', user.id)
         .maybeSingle();
 
-      if (!data && !error) {
-        const bootstrap = await supabase.rpc('bootstrap_organization', { org_name: 'AsBuiltFlow' });
-        data = bootstrap.data;
-        error = bootstrap.error;
-      }
+      if (!mounted || request !== profileRequest) return;
 
-      if (!mounted) return;
-
-      if (error) {
-        setProfileError(error.message);
+      if (error || !data?.organization_id || !data?.role) {
+        setProfile(null);
+        setProfileError(error?.message || 'Your workspace membership is unavailable. Contact your organization administrator.');
+        setLoading(false);
+        return;
       }
 
       setProfile({
         id: user.id,
         name: data?.full_name || fullNameFromUser(user),
         email: user.email,
-        role: data?.role || 'admin',
+        role: data.role,
         company: data?.organization?.name || 'AsBuiltFlow',
         organizationId: data?.organization_id || null,
         contractorCompanyId: data?.contractor_company_id || null,
@@ -70,7 +70,8 @@ export default function ProtectedWorkspace() {
       if (event === 'PASSWORD_RECOVERY') setRecovering(true);
       setSession(nextSession);
       setLoading(true);
-      loadProfile(nextSession);
+      // Supabase auth callbacks must finish before making another client request.
+      window.setTimeout(() => { if (mounted) void loadProfile(nextSession); }, 0);
     });
 
     return () => {
@@ -95,6 +96,7 @@ export default function ProtectedWorkspace() {
   if (loading) return <div style={{minHeight:'100vh',display:'grid',placeItems:'center',fontFamily:'Inter,system-ui'}}>Loading secure workspace…</div>;
   if (!session) return <AuthPage />;
   if (recovering) return <UpdatePasswordPage onComplete={() => setRecovering(false)} />;
+  if (profileError || !profile) return <div className="rwCenter"><p role="alert">{profileError || 'Workspace membership could not be verified.'}</p><button onClick={() => supabase.auth.signOut()}>Sign out</button></div>;
   if (!profile?.active) return <div style={{padding:'48px',fontFamily:'Inter,system-ui'}}>This account has been deactivated. Contact your organization administrator.</div>;
 
   return (

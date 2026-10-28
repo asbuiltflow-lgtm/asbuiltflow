@@ -1,0 +1,7 @@
+export const canCoordinate=role=>['admin','project_manager','coordinator'].includes(role);
+export const canEditEvidence=role=>['admin','project_manager','coordinator','contractor_admin','contractor_user'].includes(role);
+export const canCreateIssue=role=>['admin','project_manager','coordinator','inspector'].includes(role);
+export const isProjectWritable=project=>!project.archived&&!['approved','closed'].includes(project.status);
+export function projectTransitions(role,status){const next=[];if(canCoordinate(role)&&['submitted','revision_submitted'].includes(status))next.push('Coordinator Review');if(canCreateIssue(role)&&['submitted','revision_submitted','coordinator_review','ready_for_inspection','inspector_review'].includes(status))next.push('Needs Rework');if(['admin','project_manager','inspector'].includes(role)&&status==='ready_for_inspection')next.push('Inspector Review');return next}
+export function issueTransitions(role,status){if(['contractor_admin','contractor_user'].includes(role))return {open:['In Progress','Contractor Responded'],in_progress:['Contractor Responded'],contractor_responded:['Ready for Review']}[status]||[];if(!canCreateIssue(role))return [];return [...(status==='ready_for_review'?['Resolved']:[]),...(status==='resolved'?['Closed']:[]),...(status!=='open'?['Open']:[])]}
+export const completionText=project=>project.closeout?.counts.percent==null?'Not configured':`${project.closeout.counts.percent}%`;
