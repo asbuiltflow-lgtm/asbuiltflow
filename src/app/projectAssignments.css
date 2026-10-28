@@ -1,0 +1,4 @@
+.projectAssignmentsForm{padding:16px 0 0}
+.projectAssignmentsForm>small{color:#64748b}
+.projectStatusTable .rwTr{grid-template-columns:minmax(180px,1.7fr) minmax(130px,1fr) minmax(150px,1.15fr) minmax(150px,1.15fr) minmax(120px,1fr) minmax(90px,.7fr);min-width:980px}
+.projectStatusTable .rwTr>span:nth-child(4){display:grid;gap:5px}

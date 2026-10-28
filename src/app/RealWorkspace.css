@@ -39,3 +39,34 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 @media(max-width:430px){.rwKpis{grid-template-columns:1fr 1fr}.rwKpis>div{min-height:88px}.rwKpis span{font-size:9px}.rwKpis strong{font-size:25px}.rwBell{padding:9px 11px}.rwDemoBanner a{border-left:0;padding-left:0;width:100%}.rwProjectCard{grid-template-columns:1fr}.rwProjectCard>.rwStatus{margin-top:7px}.rwProjectCard progress,.rwProjectCard>small{grid-column:1}}
 .rwProjectStatusSummary{display:flex;gap:12px;flex-wrap:wrap;padding:12px 16px;margin:0 0 14px;background:#f3f7fc;border:1px solid #dce6f2;border-radius:10px;color:#17345b}.rwProjectStatusSummary strong{font-size:13px}
 .rwDerivedStatuses{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;padding:12px}.rwDerivedStatuses>button,.rwDerivedStatuses>article{display:grid;gap:6px;padding:12px;border:1px solid #dce6f2;border-radius:8px;background:#fff;color:#17345b;text-align:left}.rwDerivedStatuses>button{cursor:pointer}.rwDerivedStatuses>button:hover{border-color:#8baed5}.rwDerivedStatuses span{font-size:12px;color:#53657b}
+
+/* Project workflow tabs, field workspace, and PM queue */
+.rwProjectTabs{display:flex;gap:4px;overflow-x:auto;border-bottom:1px solid #dbe3ed;margin:0 0 18px;padding:0 2px;scrollbar-width:thin}
+.rwProjectTabs button{flex:0 0 auto;min-height:44px;padding:10px 15px;border:0;border-bottom:3px solid transparent;background:transparent;color:#52647c;font-weight:750;cursor:pointer}
+.rwProjectTabs button:hover{background:#eef4fc;color:#17345c}
+.rwProjectTabs button.active{border-bottom-color:#2563eb;color:#17345c}
+.rwProjectTabs button:focus-visible{outline:3px solid rgba(37,99,235,.24);outline-offset:-3px}
+.rwProjectTabPanel{min-width:0}
+.rwProjectTeam{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 18px}
+.rwProjectTeam>div{min-width:0;padding:14px 16px;border:1px solid #e1e8f0;border-radius:12px;background:#fff}
+.rwProjectTeam span,.rwProjectTeam strong{display:block;overflow-wrap:anywhere}
+.rwProjectTeam span{margin-bottom:6px;color:#64748b;font-size:11px;font-weight:750}
+.rwProjectTeam strong{color:#1c2f49;font-size:13px}
+.rwFieldCrewHint{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:0 0 16px;padding:15px 17px;border:1px solid #cfe0f5;border-radius:12px;background:#f1f7ff;color:#24456e}
+.rwFieldCrewHint>div{flex:1 1 280px}.rwFieldCrewHint p{margin:5px 0 0;font-size:13px;line-height:1.5}.rwFieldCrewHint>span{font-size:12px;font-weight:750}
+.rwReferenceUpload{padding:16px;margin:14px 18px 18px;border:1px solid #e1e8f0;border-radius:12px;background:#fbfcfe}
+.rwReferenceList{display:grid;gap:0;margin:14px 18px 18px;border-top:1px solid #e7edf4}
+.rwReferenceList article{display:grid;grid-template-columns:minmax(130px,.45fr) minmax(0,1fr) auto;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid #e7edf4}
+.rwReferenceType{color:#315d91;font-size:11px;font-weight:800}
+.rwReferenceFile{display:grid;min-width:0;gap:4px;overflow-wrap:anywhere}.rwReferenceFile small{color:#708096;font-size:11px}
+.rwFieldPhotoUpload{display:inline-flex;align-items:center;gap:12px;margin:8px 18px 14px;padding:11px 14px;border:1px solid #cbd8e8;border-radius:10px;background:#fff;color:#1c3557;font-size:13px;font-weight:750;cursor:pointer}
+.rwFieldPhotoUpload input{max-width:230px;font-size:12px}
+.rwSetupGroup{display:grid;gap:13px;padding:16px;border:1px solid #e2e8f0;border-radius:12px;background:#fbfcfe}
+.rwSetupGroup h3{margin:0;color:#1b3659;font-size:14px}
+.rwSetupDocuments{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.rwSetupDocuments li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 11px;border:1px solid #e2e8f0;border-radius:9px;background:#fff}
+.rwSetupDocuments li span{display:grid;min-width:0;gap:3px;overflow-wrap:anywhere}.rwSetupDocuments small{color:#64748b;font-size:11px}
+.coPackageSummary{margin:14px 0 18px}
+@media(max-width:900px){.rwProjectTeam{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){.rwProjectTabs{position:sticky;top:64px;z-index:15;margin:0 -14px 16px;padding:0 12px;background:#f5f7fb}.rwProjectTabs button{min-height:46px;padding:10px 12px;font-size:12px}.rwProjectTeam{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.rwProjectTeam>div{padding:11px}.rwReferenceUpload{margin:12px 10px;padding:12px}.rwReferenceList{margin:12px 10px}.rwReferenceList article{grid-template-columns:minmax(0,1fr) auto;gap:6px 10px}.rwReferenceType{grid-column:1/-1}.rwFieldPhotoUpload{display:flex;align-items:flex-start;flex-direction:column;margin:8px 10px}.rwFieldPhotoUpload input{max-width:100%;width:100%}.rwFieldCrewHint{align-items:stretch;flex-direction:column}.rwSetupGroup{padding:12px}.rwSetupDocuments li{align-items:flex-start}.rwProjectTabPanel{padding-top:2px}}
+.rwQueueFilters{display:flex;gap:8px;overflow-x:auto;padding:2px 0 12px;scrollbar-width:thin}.rwQueueFilters button{flex:0 0 auto;border:1px solid #d6dfeb;background:#fff;color:#334155;border-radius:8px;padding:8px 10px;font:inherit;font-size:12px;font-weight:700}.rwQueueFilters button.active{background:#153c68;color:#fff;border-color:#153c68}.rwQueueFilters span{margin-left:6px;opacity:.75}.rwQueueList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.rwQueueItem{display:grid;justify-items:start;text-align:left;gap:5px;padding:13px;border:1px solid #dbe4ef;border-radius:10px;background:#fff;color:#18324d;cursor:pointer}.rwQueueItem:hover{border-color:#7ba9dc;background:#f8fbff}.rwQueueItem strong{font-size:14px}.rwQueueItem small,.rwQueueItem>span:last-child{font-size:12px;color:#64748b;line-height:1.5}.rwQueueType{font-size:10px;font-weight:800;letter-spacing:.03em;color:#1d4ed8;text-transform:uppercase}.rwQueueType.needs_revision,.rwQueueType.invoice_blocked,.rwQueueType.issue{color:#b45309}.rwQueueType.final_acceptance{color:#15803d}@media(max-width:760px){.rwQueueList{grid-template-columns:1fr}.rwQueueFilters{margin-right:-4px}.rwQueueItem{padding:12px}}
